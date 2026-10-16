@@ -53,7 +53,10 @@ entity data_path is
       -- prosirenje do 32I
       rd_be_i: in std_logic_vector (1 downto 0);
       sext_op_i: in std_logic_vector (1 downto 0);
-      mem_unsigned_i: in std_logic -- wb faza
+      mem_unsigned_i: in std_logic; -- wb faza
+      
+      -- za LUI
+      set_a_to_0_i: in std_logic
       
       );
       
@@ -191,8 +194,10 @@ begin
    pc_id_o <= pc_reg_id_s;
 
    -- multiplekseri za prosledjivanje operanada iz kasnijih faza pajplajna
+   -- ako je LUI, prosledi 0 na a ulaz i radi sabiranje sa ALU
    alu_forward_a_ex_s <= rd_data_wb_s when alu_forward_a_i = "01" else
                          alu_result_mem_s when alu_forward_a_i = "10" else
+                         (others => '0') when set_a_to_0_i = '1' else
                          rs1_data_ex_s;
    alu_forward_b_ex_s <= rd_data_wb_s when alu_forward_b_i = "01" else
                          alu_result_mem_s when alu_forward_b_i = "10" else

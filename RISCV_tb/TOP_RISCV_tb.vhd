@@ -116,7 +116,7 @@ begin
          wait until rising_edge(clk);
       end loop;
       wea_instr_s <= (others => '0');
-      reset <= '1' after 20 ns;
+      reset <= '1' after 200 ns;
       wait;
    end process;
 

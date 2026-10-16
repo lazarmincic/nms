@@ -48,7 +48,10 @@ entity control_path is
       -- proširenje do 32I
       rd_be_o: out std_logic_vector (1 downto 0); -- byte enable
       sext_op_o: out std_logic_vector (1 downto 0); -- sign extend operand
-      mem_unsigned_o: out std_logic -- bira izmedju lb i lbu (lh i lhu) u wb fazi
+      mem_unsigned_o: out std_logic; -- bira izmedju lb i lbu (lh i lhu) u wb fazi
+      
+      -- za LUI
+      set_a_to_0_o: out std_logic
       );
 end entity;
 
@@ -148,6 +151,7 @@ begin
             rd_address_ex_s  <= (others => '0');
             rd_we_ex_s       <= '0';
             data_mem_we_ex_s <= '0';
+            set_a_to_0_ex_s <= '0';
          else
             branch_ex_s      <= branch_id_s;
             funct7_ex_s      <= funct7_id_s;
@@ -155,10 +159,12 @@ begin
             alu_src_b_ex_s   <= alu_src_b_id_s;
             mem_to_reg_ex_s  <= mem_to_reg_id_s;
             alu_2bit_op_ex_s <= alu_2bit_op_id_s;
-            rs1_address_ex_s <= rs1_address_id_s; rs2_address_ex_s <= rs2_address_id_s;
+            rs1_address_ex_s <= rs1_address_id_s; 
+            rs2_address_ex_s <= rs2_address_id_s;
             rd_address_ex_s  <= rd_address_id_s;
             rd_we_ex_s       <= rd_we_id_s;
             data_mem_we_ex_s <= data_mem_we_id_s;
+            set_a_to_0_ex_s <= set_a_to_0_id_s;
          end if;
       end if;
    end process;
@@ -311,6 +317,12 @@ begin
                           '0';
                           
     mem_unsigned_o <= mem_unsigned_wb_s;
+    
+    -- LUI
+    set_a_to_0_id_s <= '1' when instruction_i(6 downto 2) = "01101" else
+                       '0';
+                    
+    set_a_to_0_o <= set_a_to_0_ex_s;
 
 end architecture;
 

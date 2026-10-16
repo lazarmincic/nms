@@ -70,5 +70,9 @@ package controlpath_signals_pkg is
    signal mem_unsigned_mem_s : std_logic := '0';
    signal mem_unsigned_wb_s : std_logic := '0';
    
+   -- LUI
+   signal set_a_to_0_id_s: std_logic := '0';
+   signal set_a_to_0_ex_s: std_logic := '0';
+   
 
 end package controlpath_signals_pkg;
