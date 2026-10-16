@@ -45,6 +45,8 @@ package controlpath_signals_pkg is
    signal rd_we_mem_s       : std_logic := '0';
    signal mem_to_reg_mem_s  : std_logic := '0';
    signal rd_address_mem_s  : std_logic_vector (4 downto 0) := (others=>'0');
+   
+   signal funct3_mem_s      : std_logic_vector(2 downto 0) := (others=>'0');
 
    --*********      WRITEBACK      **************
    signal rd_we_wb_s        : std_logic := '0';
@@ -60,6 +62,13 @@ package controlpath_signals_pkg is
    signal bpu_en_s : std_logic := '0';
    
    signal branch_taken_s : std_logic := '0';
+   
+   -- prosirenje do 32I
+   
+   signal rd_be_mem_s : std_logic_vector (1 downto 0) := (others=>'0');
+   signal rd_be_wb_s : std_logic_vector (1 downto 0) := (others=>'0');
+   signal mem_unsigned_mem_s : std_logic := '0';
+   signal mem_unsigned_wb_s : std_logic := '0';
    
 
 end package controlpath_signals_pkg;

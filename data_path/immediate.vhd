@@ -38,6 +38,8 @@ begin
             instruction_type <= r_type_instruction;
          when "00100" =>
             instruction_type <= i_type_instruction;
+         when "00000" =>
+            instruction_type <= i_type_instruction;
          when "01000" =>
             instruction_type <= s_type_instruction;
          when "11000" =>

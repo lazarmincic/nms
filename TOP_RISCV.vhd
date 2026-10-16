@@ -52,6 +52,12 @@ architecture structural of TOP_RISCV is
    
    signal id_ex_flush_s : std_logic;
    
+   --prosirenje do 32I
+   signal rd_be_s: std_logic_vector (1 downto 0);
+   signal sext_op_s: std_logic_vector (1 downto 0);
+   
+   signal mem_unsigned_s: std_logic;
+   
 begin
    -- Instanca datapath-a
    data_path_1: entity work.data_path
@@ -92,7 +98,12 @@ begin
          pred_target_id_o => pred_target_id_s,
          pc_id_o => pc_id_s,
          
-         id_ex_flush_i => id_ex_flush_s
+         id_ex_flush_i => id_ex_flush_s,
+         
+         -- prosirenje do 32I
+         rd_be_i => rd_be_s,
+         sext_op_i => sext_op_s,
+         mem_unsigned_i => mem_unsigned_s
          ); 
 
     instr_mem_address_o <= instr_mem_address_s;
@@ -134,7 +145,13 @@ begin
          
          pc_id_i => pc_id_s,
          
-         id_ex_flush_o => id_ex_flush_s
+         id_ex_flush_o => id_ex_flush_s,
+         
+         -- prosirenje do 32I
+         rd_be_o => rd_be_s,
+         sext_op_o => sext_op_s,
+         
+         mem_unsigned_o => mem_unsigned_s
          );
    
 end architecture;

@@ -53,6 +53,10 @@ package datapath_signals_pkg is
    signal rd_data_wb_s            : std_logic_vector (31 downto 0) := (others=>'0');
    signal rd_address_wb_s         : std_logic_vector (4 downto 0) := (others=>'0');
    signal data_mem_read_wb_s      : std_logic_vector (31 downto 0) := (others=>'0');
+   
+   -- prosirenje do 32I
+   signal data_mem_read_se_wb_s   : std_logic_vector (31 downto 0) := (others=>'0');
+   signal data_mem_read_ext_wb_s  : std_logic_vector (31 downto 0) := (others=>'0');
 
 
 end package datapath_signals_pkg;

@@ -66,8 +66,11 @@ begin
    end process;
    
    -- asinhrono citanje
-   process(en_a_i, en_b_i, addr_a_i, addr_b_i)
+   process(en_a_i, en_b_i, addr_a_i, addr_b_i, ram_s)
    begin
+      -- [odrazumevane vrednosti
+      data_a_o <= (others => '0');
+      data_b_o <= (others => '0');
       if(en_a_i='1') then
          data_a_o(31 downto 24) <= ram_s(to_integer(unsigned(addr_a_i)+3));
          data_a_o(23 downto 16) <= ram_s(to_integer(unsigned(addr_a_i)+2));

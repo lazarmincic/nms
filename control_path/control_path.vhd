@@ -43,7 +43,12 @@ entity control_path is
       -- vrednost pc registra u id fazi (za upis u btb i bht)
       pc_id_i : in std_logic_vector (31 downto 0);
       -- flush za id ex registar unutar data path a
-      id_ex_flush_o: out std_logic
+      id_ex_flush_o: out std_logic;
+      
+      -- proširenje do 32I
+      rd_be_o: out std_logic_vector (1 downto 0); -- byte enable
+      sext_op_o: out std_logic_vector (1 downto 0); -- sign extend operand
+      mem_unsigned_o: out std_logic -- bira izmedju lb i lbu (lh i lhu) u wb fazi
       );
 end entity;
 
@@ -167,11 +172,13 @@ begin
             rd_we_mem_s       <= '0';
             mem_to_reg_mem_s  <= '0';
             rd_address_mem_s  <= (others => '0');
+            funct3_mem_s <= (others => '0');
          else
             data_mem_we_mem_s <= data_mem_we_ex_s;
             rd_we_mem_s       <= rd_we_ex_s;
             mem_to_reg_mem_s  <= mem_to_reg_ex_s;
             rd_address_mem_s  <= rd_address_ex_s;
+            funct3_mem_s <= funct3_ex_s;
          end if;
       end if;
    end process;
@@ -184,10 +191,14 @@ begin
             rd_we_wb_s      <= '0';
             mem_to_reg_wb_s <= '0';
             rd_address_wb_s <= (others => '0');
+            rd_be_wb_s <= (others => '0');
+            mem_unsigned_wb_s <= '0';
          else
             rd_we_wb_s      <= rd_we_mem_s;
             mem_to_reg_wb_s <= mem_to_reg_mem_s;
             rd_address_wb_s <= rd_address_mem_s;
+            rd_be_wb_s <= rd_be_mem_s;
+            mem_unsigned_wb_s <= mem_unsigned_mem_s;
          end if;
       end if;
    end process;
@@ -287,6 +298,19 @@ begin
     pred_taken_o <= pred_taken_s;
     pred_address_o <= pred_address_s;
     
+    -- kontrolni signal za biranje bitova za prosledjivanje u wb fazu
+    -- ( za read byte i read half word instrukcije)
+    
+    rd_be_mem_s <= funct3_mem_s(1 downto 0);  -- 00 - byte, 01 - half, 10 - word
+               
+    rd_be_o <= rd_be_mem_s;
+    
+    sext_op_o <= rd_be_wb_s;
+    
+    mem_unsigned_mem_s <= '1' when funct3_mem_s(2) = '1' else
+                          '0';
+                          
+    mem_unsigned_o <= mem_unsigned_wb_s;
 
 end architecture;
 

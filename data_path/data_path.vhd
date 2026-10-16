@@ -48,7 +48,12 @@ entity data_path is
       
       pc_id_o : out std_logic_vector (31 downto 0);
       
-      id_ex_flush_i : in std_logic
+      id_ex_flush_i : in std_logic;
+      
+      -- prosirenje do 32I
+      rd_be_i: in std_logic_vector (1 downto 0);
+      sext_op_i: in std_logic_vector (1 downto 0);
+      mem_unsigned_i: in std_logic -- wb faza
       
       );
       
@@ -198,9 +203,14 @@ begin
              alu_forward_b_ex_s;
 
    a_ex_s <= alu_forward_a_ex_s;
+   
+   -- multiplekser koji bira na koji nacin se podatak procitan iz memorije
+   -- dopunjava do 32 bita (lh, lb, lhu, lbu)
+   data_mem_read_ext_wb_s <= data_mem_read_se_wb_s when mem_unsigned_i = '0' else
+                             data_mem_read_wb_s;
 
    -- multiplekser koji selektuje sta se upisuje u odredisni registar
-   rd_data_wb_s <= data_mem_read_wb_s when mem_to_reg_i = '1' else
+   rd_data_wb_s <= data_mem_read_ext_wb_s when mem_to_reg_i = '1' else
                    alu_result_wb_s;
 
    -- izdvoji adrese opereanada iz 32-bitne instrukcije
@@ -244,6 +254,14 @@ begin
          res_o  => alu_result_ex_s,
          zero_o => alu_zero_ex_s,
          of_o   => alu_of_ex_s);
+         
+   -- sign extend (za lb, lh, lbu, lhu)
+   sign_extend_1: entity work.sign_extend
+        port map (
+            input_i => data_mem_read_wb_s,
+            output_o => data_mem_read_se_wb_s,
+            sext_op_i => sext_op_i
+        );
 
    --***********  Ulazi/Izlazi  ***************
    -- Ka controlpath-u
@@ -254,7 +272,11 @@ begin
    -- Sa memorijom za podatke
    data_mem_address_o  <= alu_result_mem_s;
    data_mem_write_o    <= rs2_data_mem_s;
-   data_mem_read_mem_s <= data_mem_read_i;
+   
+   data_mem_read_mem_s <= (31 downto 8 => '0') & data_mem_read_i(7 downto 0) when rd_be_i = "00" else
+                          (31 downto 16 => '0') & data_mem_read_i(15 downto 0) when rd_be_i = "01" else
+                          data_mem_read_i    when rd_be_i = "10" else
+                          (others => '0');
 
 end architecture;
 
