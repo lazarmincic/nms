@@ -39,6 +39,7 @@ package datapath_signals_pkg is
    signal rs1_data_ex_s           : std_logic_vector (31 downto 0) := (others=>'0');
    signal rs2_data_ex_s           : std_logic_vector (31 downto 0) := (others=>'0');
    signal rd_address_ex_s         : std_logic_vector (4 downto 0) := (others=>'0');
+   signal pc_reg_ex_s             : std_logic_vector (31 downto 0) := (others=>'0');
 
    --*********       MEMORY        **************
    signal pc_adder_mem_s          : std_logic_vector (31 downto 0) := (others=>'0');

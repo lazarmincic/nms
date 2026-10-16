@@ -73,6 +73,9 @@ package controlpath_signals_pkg is
    -- LUI
    signal set_a_to_0_id_s: std_logic := '0';
    signal set_a_to_0_ex_s: std_logic := '0';
+   -- AUIPC
+   signal a_is_pc_id_s: std_logic := '0';
+   signal a_is_pc_ex_s: std_logic := '0';
    
 
 end package controlpath_signals_pkg;

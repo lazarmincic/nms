@@ -56,7 +56,9 @@ entity data_path is
       mem_unsigned_i: in std_logic; -- wb faza
       
       -- za LUI
-      set_a_to_0_i: in std_logic
+      set_a_to_0_i: in std_logic;
+      -- za AUIPC
+      a_is_pc_i: in std_logic
       
       );
       
@@ -111,12 +113,14 @@ begin
             rs2_data_ex_s           <= (others => '0');
             immediate_extended_ex_s <= (others => '0');
             rd_address_ex_s         <= (others => '0');
+            pc_reg_ex_s <= (others => '0');
          else
             pc_adder_ex_s           <= pc_adder_id_s;
             rs1_data_ex_s           <= rs1_data_id_s;
             rs2_data_ex_s           <= rs2_data_id_s;
             immediate_extended_ex_s <= immediate_extended_id_s;
             rd_address_ex_s         <= rd_address_id_s;
+            pc_reg_ex_s <= pc_reg_id_s;
          end if;
       end if;
    end process;
@@ -195,10 +199,13 @@ begin
 
    -- multiplekseri za prosledjivanje operanada iz kasnijih faza pajplajna
    -- ako je LUI, prosledi 0 na a ulaz i radi sabiranje sa ALU
+   -- ako je AUIPC, prosledi pc vrednost na a
    alu_forward_a_ex_s <= rd_data_wb_s when alu_forward_a_i = "01" else
                          alu_result_mem_s when alu_forward_a_i = "10" else
                          (others => '0') when set_a_to_0_i = '1' else
+                         pc_reg_ex_s when a_is_pc_i = '1' else
                          rs1_data_ex_s;
+                         
    alu_forward_b_ex_s <= rd_data_wb_s when alu_forward_b_i = "01" else
                          alu_result_mem_s when alu_forward_b_i = "10" else
                          rs2_data_ex_s;

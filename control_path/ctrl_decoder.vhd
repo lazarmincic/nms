@@ -64,6 +64,9 @@ begin
             rd_we_o <= '1';
             alu_2bit_op_o <= "00";
          when "0010111" =>  -- AUIPC
+            alu_src_b_o <= '1';
+            rd_we_o <= '1';
+            alu_2bit_op_o <= "00";
          when others =>
       end case;
    end process;

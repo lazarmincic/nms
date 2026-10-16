@@ -51,7 +51,9 @@ entity control_path is
       mem_unsigned_o: out std_logic; -- bira izmedju lb i lbu (lh i lhu) u wb fazi
       
       -- za LUI
-      set_a_to_0_o: out std_logic
+      set_a_to_0_o: out std_logic;
+      -- za AUIPC
+      a_is_pc_o: out std_logic
       );
 end entity;
 
@@ -152,6 +154,7 @@ begin
             rd_we_ex_s       <= '0';
             data_mem_we_ex_s <= '0';
             set_a_to_0_ex_s <= '0';
+            a_is_pc_ex_s <= '0';
          else
             branch_ex_s      <= branch_id_s;
             funct7_ex_s      <= funct7_id_s;
@@ -165,6 +168,7 @@ begin
             rd_we_ex_s       <= rd_we_id_s;
             data_mem_we_ex_s <= data_mem_we_id_s;
             set_a_to_0_ex_s <= set_a_to_0_id_s;
+            a_is_pc_ex_s <= a_is_pc_id_s;
          end if;
       end if;
    end process;
@@ -323,6 +327,13 @@ begin
                        '0';
                     
     set_a_to_0_o <= set_a_to_0_ex_s;
+    
+    -- AUIPC
+    
+    a_is_pc_id_s <= '1' when instruction_i(6 downto 2) = "00101" else
+                    '0';
+                    
+    a_is_pc_o <= a_is_pc_ex_s;
 
 end architecture;
 
