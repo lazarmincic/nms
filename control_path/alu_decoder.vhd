@@ -59,6 +59,19 @@ begin
                     alu_op_o <= add_op; 
                 when "110" =>
                     alu_op_o <= or_op;
+                when "001" =>
+                    alu_op_o <= sll_op;
+                when "010" => 
+                    alu_op_o <= lts_op;
+                when "011" =>
+                    alu_op_o <= ltu_op;
+                when "100" =>
+                    alu_op_o <= xor_op;
+                when "101" =>
+                    alu_op_o <= srl_op;
+                    if (funct7_i(5)='1') then
+                        alu_op_o <= sra_op;
+                    end if;   
                 when others =>
                     alu_op_o <= and_op;
             end case;

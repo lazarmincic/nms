@@ -15,12 +15,12 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="8.497660 us"></ZoomEndTime>
-      <Cursor1Time time="0.500000 us"></Cursor1Time>
+      <ZoomEndTime time="9.000001 us"></ZoomEndTime>
+      <Cursor1Time time="9.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="276"></NameColumnWidth>
-      <ValueColumnWidth column_width="68"></ValueColumnWidth>
+      <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="20" />
    <wvobject type="logic" fp_name="/TOP_RISCV_tb/instruction_mem/clk">
@@ -561,12 +561,10 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/op_i">
          <obj_property name="ElementShortName">op_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">op_i[4:0]</obj_property>
-         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/res_o">
          <obj_property name="ElementShortName">res_o[31:0]</obj_property>
          <obj_property name="ObjectShortName">res_o[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/zero_o">
          <obj_property name="ElementShortName">zero_o</obj_property>
@@ -579,32 +577,50 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/add_res">
          <obj_property name="ElementShortName">add_res[31:0]</obj_property>
          <obj_property name="ObjectShortName">add_res[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/sub_res">
          <obj_property name="ElementShortName">sub_res[31:0]</obj_property>
          <obj_property name="ObjectShortName">sub_res[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/or_res">
          <obj_property name="ElementShortName">or_res[31:0]</obj_property>
          <obj_property name="ObjectShortName">or_res[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/and_res">
          <obj_property name="ElementShortName">and_res[31:0]</obj_property>
          <obj_property name="ObjectShortName">and_res[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/res_s">
          <obj_property name="ElementShortName">res_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">res_s[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/eq_res">
          <obj_property name="ElementShortName">eq_res[31:0]</obj_property>
          <obj_property name="ObjectShortName">eq_res[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/sll_res">
+         <obj_property name="ElementShortName">sll_res[31:0]</obj_property>
+         <obj_property name="ObjectShortName">sll_res[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/lts_res">
+         <obj_property name="ElementShortName">lts_res[31:0]</obj_property>
+         <obj_property name="ObjectShortName">lts_res[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/ltu_res">
+         <obj_property name="ElementShortName">ltu_res[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ltu_res[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/xor_res">
+         <obj_property name="ElementShortName">xor_res[31:0]</obj_property>
+         <obj_property name="ObjectShortName">xor_res[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/srl_res">
+         <obj_property name="ElementShortName">srl_res[31:0]</obj_property>
+         <obj_property name="ObjectShortName">srl_res[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/sra_res">
+         <obj_property name="ElementShortName">sra_res[31:0]</obj_property>
+         <obj_property name="ObjectShortName">sra_res[31:0]</obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/WIDTH">
          <obj_property name="ElementShortName">WIDTH</obj_property>
