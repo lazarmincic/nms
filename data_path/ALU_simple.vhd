@@ -21,7 +21,7 @@ ARCHITECTURE behavioral OF ALU IS
 
    constant  l2WIDTH : natural := integer(ceil(log2(real(WIDTH))));
    signal    add_res, sub_res, or_res, and_res,res_s, eq_res :  STD_LOGIC_VECTOR(WIDTH-1 DOWNTO 0);
-
+   signal    sll_res, lts_res, ltu_res, xor_res, srl_res, sra_res : std_logic_vector (WIDTH-1 downto 0);
    
 BEGIN
 
@@ -36,7 +36,27 @@ BEGIN
    -- jednakost
    eq_res <= std_logic_vector(to_unsigned(1,WIDTH)) when (signed(a_i) = signed(b_i)) else
              std_logic_vector(to_unsigned(0,WIDTH));
+             
+   -- pomeranje u levo
+   sll_res <= std_logic_vector(shift_left(unsigned(a_i), to_integer(unsigned(b_i))));
 
+    -- set less than signed
+   lts_res <= std_logic_vector(to_unsigned(1,WIDTH)) when signed(a_i) < signed(b_i) else
+              std_logic_vector(to_unsigned(0,WIDTH));
+              
+   -- set less than unsigned
+   ltu_res <= std_logic_vector(to_unsigned(1,WIDTH)) when unsigned(a_i) < unsigned(b_i) else
+             std_logic_vector(to_unsigned(0,WIDTH));
+             
+   -- bitwise xor
+   xor_res <= a_i xor b_i;
+   
+   -- shift right logical
+   srl_res <= std_logic_vector(shift_right(unsigned(a_i), to_integer(unsigned(b_i))));
+   
+   -- shift right arithmetic
+   sra_res <= std_logic_vector(shift_right(signed(a_i), to_integer(unsigned(b_i))));
+   
    
    -- prosledi jedan od rezultata na izlaz u odnosu na  operaciju
    res_o <= res_s;
@@ -46,6 +66,12 @@ BEGIN
                add_res when add_op,
                sub_res when sub_op,
                eq_res  when eq_op,
+               sll_res when sll_op,
+               lts_res when lts_op,
+               ltu_res when ltu_op,
+               xor_res when xor_op,
+               srl_res when srl_op,
+               sra_res when sra_op,
                (others => '1') when others; 
 
 
