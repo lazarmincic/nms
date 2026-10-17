@@ -36,6 +36,8 @@ architecture Behavioral of branch_predict_unit is
     signal bht_we : std_logic ;
 begin
 
+    -- treba promeniti u gshare tip (ovo je smit)
+
     -- IF faza (data path a) - citanje
     rd_index <= pc_if_i (BTB_ADDR_WIDTH+2-1 downto 2);
     rd_tag <= pc_if_i (31 downto 2+BTB_ADDR_WIDTH);

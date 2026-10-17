@@ -50,12 +50,16 @@ entity control_path is
       sext_op_o: out std_logic_vector (1 downto 0); -- sign extend operand
       mem_unsigned_o: out std_logic; -- bira izmedju lb i lbu (lh i lhu) u wb fazi
       
-      -- za LUI
+      -- za LUI i JAL
       set_a_to_0_o: out std_logic;
       -- za AUIPC
       a_is_pc_o: out std_logic;
       -- za instrukcije skoka
-      branch_op_o: out std_logic_vector (2 downto 0)
+      branch_op_o: out std_logic_vector (2 downto 0);
+      -- za jal
+      is_uncond_o : out std_logic;
+      -- za jalr
+      branch_adder_sel_o : out std_logic
       );
 end entity;
 
@@ -89,9 +93,14 @@ begin
    --    azurira btb i bht
    
    -- branch_condition_i je ulaz iz data path-a koji govori da li se skok desio
+   -- za uslovne skokove
+   
+   uncond_jump_id_s <= '1' when instruction_i(6 downto 2) = "11011" 
+                             or instruction_i(6 downto 2) = "11001" else
+                       '0';
                      
    pc_next_if_s : process(branch_id_s, branch_condition_i, bcc_id_s, pred_taken_s, pred_taken_id_i,
-        branch_adder_id_i, pred_target_id_i)
+        branch_adder_id_i, pred_target_id_i, uncond_jump_id_s)
    begin
       if_id_flush_s <= '0';
       pc_next_sel_o <= "00"; -- nema skoka
@@ -133,6 +142,11 @@ begin
             end if;
          end if;
       end if;
+      -- bezuslovni skok
+      if uncond_jump_id_s = '1' then
+         pc_next_sel_o <= "10";
+         if_id_flush_s <= '1';
+      end if;
    end process;
 
    bpu_en_s <= if_id_en_s;
@@ -156,6 +170,7 @@ begin
             data_mem_we_ex_s <= (others => '0');
             set_a_to_0_ex_s <= '0';
             a_is_pc_ex_s <= '0';
+            is_uncond_ex_s <= '0';
          else
             branch_ex_s      <= branch_id_s;
             funct7_ex_s      <= funct7_id_s;
@@ -170,6 +185,7 @@ begin
             data_mem_we_ex_s <= data_mem_we_id_s;
             set_a_to_0_ex_s <= set_a_to_0_id_s;
             a_is_pc_ex_s <= a_is_pc_id_s;
+            is_uncond_ex_s <= is_uncond_id_s;
          end if;
       end if;
    end process;
@@ -326,7 +342,7 @@ begin
     mem_unsigned_o <= mem_unsigned_wb_s;
     
     -- LUI
-    set_a_to_0_id_s <= '1' when instruction_i(6 downto 2) = "01101" else
+    set_a_to_0_id_s <= '1' when instruction_i(6 downto 2) = "01101" else -- lui
                        '0';
                     
     set_a_to_0_o <= set_a_to_0_ex_s;
@@ -339,6 +355,15 @@ begin
     a_is_pc_o <= a_is_pc_ex_s;
     
     branch_op_o <= funct3_id_s;
+    
+    is_uncond_id_s <= uncond_jump_id_s;
+    
+    is_uncond_o <= is_uncond_ex_s;
+    
+    -- jalr
+    branch_adder_sel_o <= '1' when instruction_i(6 downto 2) = "11001" else -- jalr
+                          '0';
+    
 
 end architecture;
 

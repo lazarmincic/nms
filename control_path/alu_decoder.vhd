@@ -24,7 +24,7 @@ begin
       -- podrazumevane vrednosti
       alu_op_o <= "00000";
       case alu_2bit_op_i is
-         when "00" =>  -- LOAD / STORE, LUI, AUIPC
+         when "00" =>  -- LOAD / STORE, LUI, AUIPC, JAL
             alu_op_o <= add_op;
          when "01" =>  -- B tip
             alu_op_o <= eq_op;

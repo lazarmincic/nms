@@ -60,6 +60,11 @@ package datapath_signals_pkg is
    signal data_mem_read_ext_wb_s  : std_logic_vector (31 downto 0) := (others=>'0');
    
    signal branch_condition_s : std_logic := '0';
+   
+   -- za jal
+   signal alu_out_s : std_logic_vector(31 downto 0) := (others=>'0');
+   -- za jalr
+   signal branch_adder_b_s: std_logic_vector(31 downto 0) := (others=>'0');
 
 
 end package datapath_signals_pkg;

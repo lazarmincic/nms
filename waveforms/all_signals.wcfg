@@ -14,12 +14,12 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="19.347923 us"></ZoomEndTime>
-      <Cursor1Time time="9.000000 us"></Cursor1Time>
+      <ZoomStartTime time="401.850 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,809.851 ns"></ZoomEndTime>
+      <Cursor1Time time="1,089.850 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="268"></NameColumnWidth>
+      <NameColumnWidth column_width="264"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="20" />
@@ -140,6 +140,7 @@
    <wvobject type="group" fp_name="group245">
       <obj_property name="label">datapath_signals</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/datapath_signals_pkg/pc_reg_if_s">
          <obj_property name="ElementShortName">pc_reg_if_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">pc_reg_if_s[31:0]</obj_property>
@@ -461,7 +462,6 @@
    <wvobject type="group" fp_name="group88">
       <obj_property name="label">register_bank</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/register_bank_1/rs1_address_i">
          <obj_property name="ElementShortName">rs1_address_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">rs1_address_i[4:0]</obj_property>
@@ -942,6 +942,10 @@
          <obj_property name="CustomSignalColor">#FF0000</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="Radix">BINARYRADIX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_adder_sel_o">
+         <obj_property name="ElementShortName">branch_adder_sel_o</obj_property>
+         <obj_property name="ObjectShortName">branch_adder_sel_o</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group151">

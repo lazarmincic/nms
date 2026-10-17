@@ -30,7 +30,9 @@ begin
          if (reset = '0')then
             reg_bank_s <= (others => (others => '0'));
          elsif (rd_we_i = '1') then
-            reg_bank_s(to_integer(unsigned(rd_address_i))) <= rd_data_i;
+            if unsigned(rd_address_i) /= 0 then
+                reg_bank_s(to_integer(unsigned(rd_address_i))) <= rd_data_i;
+            end if;
          end if;
       end if;      
    end process;

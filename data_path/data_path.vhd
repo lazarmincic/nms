@@ -61,7 +61,12 @@ entity data_path is
       a_is_pc_i: in std_logic;
       
       -- za instrukcije skoka
-      branch_op_i : in std_logic_vector (2 downto 0)
+      branch_op_i : in std_logic_vector (2 downto 0);
+      
+      -- za jal
+      is_uncond_i : in std_logic;
+      -- za jalr
+      branch_adder_sel_i: in std_logic
       
       );
       
@@ -171,8 +176,12 @@ begin
    -- sabirac za uvecavanje programskog brojaca (sledeca instrukcija)
    pc_adder_if_s <= std_logic_vector(unsigned(pc_reg_if_s) + to_unsigned(4, 32));
 
-   -- sabirac za uslovne skokove - prosledi branch predict jedinici
-   branch_adder_id_s <= std_logic_vector(signed(immediate_extended_id_s) + signed(pc_reg_id_s));
+   -- multiplekser ispred sabiraca za uslovne skokove za jalr instrukciju
+   branch_adder_b_s <= pc_reg_id_s when branch_adder_sel_i = '0' else
+                       rs1_data_id_s;
+                       
+   -- sabirac za uslovne skokove               
+   branch_adder_id_s <= std_logic_vector(signed(immediate_extended_id_s) + signed(branch_adder_b_s));
    
    branch_adder_id_o <= branch_adder_id_s;
 
@@ -198,6 +207,10 @@ begin
    pred_target_id_o <= pred_target_id_s;
    
    pc_id_o <= pc_reg_id_s;
+   
+   -- izlaz iz alu, za JAL i JALR
+   alu_result_ex_s <= pc_adder_ex_s when is_uncond_i = '1' else
+                      alu_out_s;
 
    -- multiplekseri za prosledjivanje operanada iz kasnijih faza pajplajna
    -- ako je LUI, prosledi 0 na a ulaz i radi sabiranje sa ALU
@@ -265,7 +278,7 @@ begin
          a_i    => a_ex_s,
          b_i    => b_ex_s,
          op_i   => alu_op_i,
-         res_o  => alu_result_ex_s,
+         res_o  => alu_out_s,
          zero_o => alu_zero_ex_s,
          of_o   => alu_of_ex_s);
          

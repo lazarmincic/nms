@@ -74,6 +74,10 @@ package controlpath_signals_pkg is
    -- AUIPC
    signal a_is_pc_id_s: std_logic := '0';
    signal a_is_pc_ex_s: std_logic := '0';
+   -- JAL
+   signal uncond_jump_id_s : std_logic := '0';
+   signal is_uncond_id_s : std_logic := '0';
+   signal is_uncond_ex_s : std_logic := '0';
    
 
 end package controlpath_signals_pkg;

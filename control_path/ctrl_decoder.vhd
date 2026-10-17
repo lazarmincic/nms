@@ -26,7 +26,7 @@ begin
    contol_dec : process(opcode_i, funct3_i)is
    begin
       -- podrazumevane vrednosti
-      branch_o      <= '0';
+      branch_o      <= '0'; -- samo uslovni skokovi
       mem_to_reg_o  <= '0';
       data_mem_we_o <= "00";
       alu_src_b_o   <= '0';
@@ -75,6 +75,10 @@ begin
             alu_src_b_o <= '1';
             rd_we_o <= '1';
             alu_2bit_op_o <= "00";
+         when "1101111" =>          -- JAL
+            rd_we_o <= '1';
+            alu_2bit_op_o <= "00";
+            alu_src_b_o <= '1';
          when others =>
       end case;
    end process;

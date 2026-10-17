@@ -22,7 +22,8 @@ entity forwarding_unit is
       alu_forward_b_o    : out std_logic_vector(1 downto 0);
       -- izlazi za prosledjivanje operanada komparatoru za odredjivanje uslova skoka
       branch_forward_a_o : out std_logic;
-      branch_forward_b_o : out std_logic);
+      branch_forward_b_o : out std_logic
+      );
 end entity;
 
 architecture Behavioral of forwarding_unit is
@@ -75,4 +76,10 @@ begin
          end if;
       end if;
    end process;
+   
+   -- treba dodati podrsku za jalr
+   -- prosledjuje se rs1 vrednost iz ex i mem branch adder-u u id fazi
+   -- treba dodati podrsku za branch predictor - moze da se desi situacija da je
+   -- potrebno prosledjivanje komparatoru iz ex faze u id fazu, sto ovde nije pokriveno
+   
 end architecture;
