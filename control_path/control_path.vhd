@@ -53,7 +53,9 @@ entity control_path is
       -- za LUI
       set_a_to_0_o: out std_logic;
       -- za AUIPC
-      a_is_pc_o: out std_logic
+      a_is_pc_o: out std_logic;
+      -- za instrukcije skoka
+      branch_op_o: out std_logic_vector (2 downto 0)
       );
 end entity;
 
@@ -86,12 +88,9 @@ begin
    --    resetuje if/id registar ukoliko je branch predict jedinica pogresila
    --    azurira btb i bht
    
-   -- branch_condition_i je ulaz iz komparatora, treba uzeti u obzir tip instrukcije - da li dolazi do grananja pri
-   --   jednakosti ili pri nejednakosti
-   branch_taken_s <= branch_condition_i when funct3_id_s(0)='0' else
-                     not branch_condition_i when funct3_id_s(0)='1';
+   -- branch_condition_i je ulaz iz data path-a koji govori da li se skok desio
                      
-   pc_next_if_s : process(branch_id_s, branch_taken_s, bcc_id_s, pred_taken_s, pred_taken_id_i,
+   pc_next_if_s : process(branch_id_s, branch_condition_i, bcc_id_s, pred_taken_s, pred_taken_id_i,
         branch_adder_id_i, pred_target_id_i)
    begin
       if_id_flush_s <= '0';
@@ -105,7 +104,7 @@ begin
       end if;
       -- id faza
       if (branch_id_s = '1') then -- instrukcija skoka
-         if (branch_taken_s = pred_taken_id_i and branch_adder_id_i = pred_target_id_i) then
+         if (branch_condition_i = pred_taken_id_i and branch_adder_id_i = pred_target_id_i) then
             -- skok je tačno predviđen - adresa i ishod grane su tacno predvidjeni
             -- azuriraj bht unutar bpu, btb se ne azurira
             btb_bht_we_s(0) <= '1';
@@ -114,7 +113,7 @@ begin
             -- prosledi izracunatu adresu ako se skok desio
             -- prediktor je vec prosledio pogresnu instrukciju u id, pa immediate vrednost 
             -- izracunata nije ta na koju treba da se skoci.
-            if (branch_taken_s = '1') then
+            if (branch_condition_i = '1') then
                 -- prevideo da ne skace a skocio
                 pc_next_sel_o <= "10";
                 if_id_flush_s <= '1';
@@ -129,7 +128,7 @@ begin
                 btb_bht_we_s(1) <= '1';
             end if;
             -- azuriraj bht ukoliko se ishodi skoka ne poklapaju
-            if (branch_taken_s /= pred_taken_id_i) then
+            if (branch_condition_i /= pred_taken_id_i) then
                 btb_bht_we_s(0) <= '1';
             end if;
          end if;
@@ -305,7 +304,7 @@ begin
             pc_id_i => pc_id_i,
             target_addr_id_i => branch_adder_id_i,
             btb_bht_we_i => btb_bht_we_s,
-            branch_taken_id_i => branch_taken_s,
+            branch_taken_id_i => branch_condition_i,
             en_i => bpu_en_s
         );
         
@@ -338,6 +337,8 @@ begin
                     '0';
                     
     a_is_pc_o <= a_is_pc_ex_s;
+    
+    branch_op_o <= funct3_id_s;
 
 end architecture;
 

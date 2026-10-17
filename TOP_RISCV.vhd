@@ -62,6 +62,8 @@ architecture structural of TOP_RISCV is
    signal set_a_to_0_s: std_logic;
    -- za AUIPC
    signal a_is_pc_s: std_logic;
+   -- za branch instr.
+   signal branch_op_s: std_logic_vector (2 downto 0);
    
 begin
    -- Instanca datapath-a
@@ -112,7 +114,9 @@ begin
          -- LUI
          set_a_to_0_i => set_a_to_0_s,
          -- AUIPC
-         a_is_pc_i => a_is_pc_s
+         a_is_pc_i => a_is_pc_s,
+         -- za branch instr.
+         branch_op_i => branch_op_s
          ); 
 
     instr_mem_address_o <= instr_mem_address_s;
@@ -165,7 +169,9 @@ begin
          -- LUI
          set_a_to_0_o => set_a_to_0_s,
          -- AUIPC
-         a_is_pc_o => a_is_pc_s
+         a_is_pc_o => a_is_pc_s,
+         -- za branch instr.
+         branch_op_o => branch_op_s
          );
    
 end architecture;

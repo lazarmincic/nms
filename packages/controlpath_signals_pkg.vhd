@@ -61,8 +61,6 @@ package controlpath_signals_pkg is
    signal btb_bht_we_s : std_logic_vector (1 downto 0) := (others=>'0');
    signal bpu_en_s : std_logic := '0';
    
-   signal branch_taken_s : std_logic := '0';
-   
    -- prosirenje do 32I
    
    signal rd_be_mem_s : std_logic_vector (1 downto 0) := (others=>'0');

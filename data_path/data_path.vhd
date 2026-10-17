@@ -58,7 +58,10 @@ entity data_path is
       -- za LUI
       set_a_to_0_i: in std_logic;
       -- za AUIPC
-      a_is_pc_i: in std_logic
+      a_is_pc_i: in std_logic;
+      
+      -- za instrukcije skoka
+      branch_op_i : in std_logic_vector (2 downto 0)
       
       );
       
@@ -180,8 +183,7 @@ begin
                               rs2_data_id_s;
 
    -- provera uslova za skok
-   branch_condition_o <= '1' when (signed(branch_condition_a_ex_s) = signed(branch_condition_b_ex_s)) else
-                         '0';
+   branch_condition_o <= branch_condition_s;
 
    -- multiplekser za azuriranje programskog brojaca
    with pc_next_sel_i select
@@ -273,6 +275,15 @@ begin
             input_i => data_mem_read_wb_s,
             output_o => data_mem_read_se_wb_s,
             sext_op_i => sext_op_i
+        );
+        
+   -- podrska za instrukcije grananja
+   branch_eval_1: entity work.branch_eval
+        port map (
+            operand1_i => branch_condition_a_ex_s,
+            operand2_i => branch_condition_b_ex_s,
+            operation_i => branch_op_i,
+            branch_condition_o => branch_condition_s
         );
 
    --***********  Ulazi/Izlazi  ***************

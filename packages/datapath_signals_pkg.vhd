@@ -58,6 +58,8 @@ package datapath_signals_pkg is
    -- prosirenje do 32I
    signal data_mem_read_se_wb_s   : std_logic_vector (31 downto 0) := (others=>'0');
    signal data_mem_read_ext_wb_s  : std_logic_vector (31 downto 0) := (others=>'0');
+   
+   signal branch_condition_s : std_logic := '0';
 
 
 end package datapath_signals_pkg;

@@ -15,11 +15,11 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="13.215459 us"></ZoomEndTime>
+      <ZoomEndTime time="19.347923 us"></ZoomEndTime>
       <Cursor1Time time="9.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="272"></NameColumnWidth>
+      <NameColumnWidth column_width="268"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="20" />
@@ -86,7 +86,6 @@
    <wvobject type="group" fp_name="group1464">
       <obj_property name="label">data_mem</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/data_mem/en_a_i">
          <obj_property name="ElementShortName">en_a_i</obj_property>
          <obj_property name="ObjectShortName">en_a_i</obj_property>
@@ -132,7 +131,6 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/data_mem/ram_s">
          <obj_property name="ElementShortName">ram_s[0:1023][7:0]</obj_property>
          <obj_property name="ObjectShortName">ram_s[0:1023][7:0]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/TOP_RISCV_tb/data_mem/WADDR">
          <obj_property name="ElementShortName">WADDR</obj_property>
@@ -463,6 +461,7 @@
    <wvobject type="group" fp_name="group88">
       <obj_property name="label">register_bank</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/register_bank_1/rs1_address_i">
          <obj_property name="ElementShortName">rs1_address_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">rs1_address_i[4:0]</obj_property>
@@ -494,6 +493,7 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/register_bank_1/reg_bank_s">
          <obj_property name="ElementShortName">reg_bank_s[0:31][31:0]</obj_property>
          <obj_property name="ObjectShortName">reg_bank_s[0:31][31:0]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/register_bank_1/WIDTH">
          <obj_property name="ElementShortName">WIDTH</obj_property>
@@ -810,10 +810,6 @@
          <obj_property name="ElementShortName">bpu_en_s</obj_property>
          <obj_property name="ObjectShortName">bpu_en_s</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/controlpath_signals_pkg/branch_taken_s">
-         <obj_property name="ElementShortName">branch_taken_s</obj_property>
-         <obj_property name="ObjectShortName">branch_taken_s</obj_property>
-      </wvobject>
       <wvobject type="array" fp_name="/controlpath_signals_pkg/rd_be_mem_s">
          <obj_property name="ElementShortName">rd_be_mem_s[1:0]</obj_property>
          <obj_property name="ObjectShortName">rd_be_mem_s[1:0]</obj_property>
@@ -925,12 +921,6 @@
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pred_taken_id_i">
          <obj_property name="ElementShortName">pred_taken_id_i</obj_property>
          <obj_property name="ObjectShortName">pred_taken_id_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/controlpath_signals_pkg/branch_taken_s">
-         <obj_property name="ElementShortName">branch_taken_s</obj_property>
-         <obj_property name="ObjectShortName">branch_taken_s</obj_property>
          <obj_property name="CustomSignalColor">#FF0000</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
