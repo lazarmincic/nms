@@ -9,12 +9,13 @@ entity ctrl_decoder is
       -- kontrolni signali
       branch_o      : out std_logic;
       mem_to_reg_o  : out std_logic;
-      data_mem_we_o : out std_logic;
+      data_mem_we_o : out std_logic_vector (1 downto 0);
       alu_src_b_o   : out std_logic;
       rd_we_o       : out std_logic;
       rs1_in_use_o  : out std_logic;
       rs2_in_use_o  : out std_logic;
-      alu_2bit_op_o : out std_logic_vector(1 downto 0)
+      alu_2bit_op_o : out std_logic_vector(1 downto 0);
+      funct3_i : in std_logic_vector (2 downto 0)
 
       );
 end entity;
@@ -22,12 +23,12 @@ end entity;
 architecture behavioral of ctrl_decoder is
 begin
 
-   contol_dec : process(opcode_i)is
+   contol_dec : process(opcode_i, funct3_i)is
    begin
       -- podrazumevane vrednosti
       branch_o      <= '0';
       mem_to_reg_o  <= '0';
-      data_mem_we_o <= '0';
+      data_mem_we_o <= "00";
       alu_src_b_o   <= '0';
       rd_we_o       <= '0';
       alu_2bit_op_o <= "00";
@@ -42,7 +43,14 @@ begin
             rs1_in_use_o  <= '1';
          when "0100011" =>              --STORE
             alu_2bit_op_o <= "00";
-            data_mem_we_o <= '1';
+            case funct3_i is 
+                when "000" =>
+                    data_mem_we_o <= "01"; -- byte
+                when "001" =>
+                    data_mem_we_o <= "10"; -- half
+                when others =>
+                    data_mem_we_o <= "11"; -- word
+            end case;
             alu_src_b_o   <= '1';
             rs1_in_use_o  <= '1';
             rs2_in_use_o  <= '1';

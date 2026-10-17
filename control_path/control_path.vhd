@@ -75,7 +75,9 @@ begin
    -- signal upisa 32-bitnog podatka u memoriju se prosiruje na cetiri 
    -- memorija je bajt-adresibilna pa postoji we signal za svaki bajt na lokaciji sirine 32 bita  
    data_mem_write_enable :
-      data_mem_we_o <= "1111" when data_mem_we_mem_s = '1' else
+      data_mem_we_o <= "0001" when data_mem_we_mem_s = "01" else
+                       "0011" when data_mem_we_mem_s = "10" else
+                       "1111" when data_mem_we_mem_s = "11" else
                        "0000";
 
    -- ovaj proces nadzire instrukcije skokova
@@ -152,7 +154,7 @@ begin
             rs2_address_ex_s <= (others => '0');
             rd_address_ex_s  <= (others => '0');
             rd_we_ex_s       <= '0';
-            data_mem_we_ex_s <= '0';
+            data_mem_we_ex_s <= (others => '0');
             set_a_to_0_ex_s <= '0';
             a_is_pc_ex_s <= '0';
          else
@@ -178,7 +180,7 @@ begin
    begin
       if (rising_edge(clk)) then
          if (reset = '0')then
-            data_mem_we_mem_s <= '0';
+            data_mem_we_mem_s <= (others => '0');
             rd_we_mem_s       <= '0';
             mem_to_reg_mem_s  <= '0';
             rd_address_mem_s  <= (others => '0');
@@ -228,7 +230,9 @@ begin
          rd_we_o       => rd_we_id_s,
          rs1_in_use_o  => rs1_in_use_id_s,
          rs2_in_use_o  => rs2_in_use_id_s,
-         alu_2bit_op_o => alu_2bit_op_id_s);
+         alu_2bit_op_o => alu_2bit_op_id_s,
+         funct3_i => funct3_id_s
+         );
 
    -- Dekoder za ALU operaciju
    alu_dec : entity work.alu_decoder(behavioral)
