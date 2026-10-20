@@ -35,13 +35,13 @@ begin
       rs1_in_use_o  <= '0';
       rs2_in_use_o  <= '0';
       case opcode_i is
-         when "0000011" =>              --LOAD
+         when "0000011" =>              --LOAD (I tip)
             alu_2bit_op_o <= "00";
             mem_to_reg_o  <= '1';
             alu_src_b_o   <= '1';
             rd_we_o       <= '1';
             rs1_in_use_o  <= '1';
-         when "0100011" =>              --STORE
+         when "0100011" =>              --STORE (S tip)
             alu_2bit_op_o <= "00";
             case funct3_i is 
                 when "000" =>
@@ -59,7 +59,7 @@ begin
             rd_we_o       <= '1';
             rs1_in_use_o  <= '1';
             rs2_in_use_o  <= '1';
-         when "0010011" =>              --I tip
+         when "0010011" =>              --I tip (aritm log)
             alu_2bit_op_o <= "11";
             alu_src_b_o   <= '1';
             rd_we_o       <= '1';
@@ -67,18 +67,25 @@ begin
          when "1100011" =>              --B tip
             alu_2bit_op_o <= "01";
             branch_o      <= '1';
-         when "0110111" =>  -- LUI
+            rs1_in_use_o  <= '1';
+            rs2_in_use_o  <= '1';
+         when "0110111" =>  -- LUI (U tip)
             alu_src_b_o <= '1';
             rd_we_o <= '1';
             alu_2bit_op_o <= "00";
-         when "0010111" =>  -- AUIPC
+         when "0010111" =>  -- AUIPC (U tip)
             alu_src_b_o <= '1';
             rd_we_o <= '1';
             alu_2bit_op_o <= "00";
-         when "1101111" =>          -- JAL
+         when "1101111" =>          -- JAL (J tip)
             rd_we_o <= '1';
             alu_2bit_op_o <= "00";
             alu_src_b_o <= '1';
+         when "1100111" =>          -- JALR (I tip)
+            rd_we_o <= '1';
+            alu_2bit_op_o <= "00";
+            alu_src_b_o <= '1';
+            rs1_in_use_o  <= '1';
          when others =>
       end case;
    end process;

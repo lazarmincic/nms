@@ -31,8 +31,8 @@ architecture structural of TOP_RISCV is
 
    signal alu_forward_a_s    : std_logic_vector(1 downto 0);
    signal alu_forward_b_s    : std_logic_vector(1 downto 0);
-   signal branch_forward_a_s : std_logic;
-   signal branch_forward_b_s : std_logic;
+   signal branch_forward_a_s : std_logic_vector(1 downto 0);
+   signal branch_forward_b_s : std_logic_vector(1 downto 0);
    signal branch_condition_s : std_logic;
 
    signal pc_en_s            : std_logic;
@@ -54,7 +54,6 @@ architecture structural of TOP_RISCV is
    
    --prosirenje do 32I
    signal rd_be_s: std_logic_vector (1 downto 0);
-   signal sext_op_s: std_logic_vector (1 downto 0);
    
    signal mem_unsigned_s: std_logic;
    
@@ -113,7 +112,6 @@ begin
          
          -- prosirenje do 32I
          rd_be_i => rd_be_s,
-         sext_op_i => sext_op_s,
          mem_unsigned_i => mem_unsigned_s,
          -- LUI
          set_a_to_0_i => set_a_to_0_s,
@@ -170,7 +168,6 @@ begin
          
          -- prosirenje do 32I
          rd_be_o => rd_be_s,
-         sext_op_o => sext_op_s,
          
          mem_unsigned_o => mem_unsigned_s,
          

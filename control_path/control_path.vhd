@@ -22,8 +22,8 @@ entity control_path is
       -- kontrolni signali za prosledjivanje operanada u ranije faze protocne obrade
       alu_forward_a_o    : out std_logic_vector (1 downto 0);
       alu_forward_b_o    : out std_logic_vector (1 downto 0);
-      branch_forward_a_o : out std_logic;  -- mux a 
-      branch_forward_b_o : out std_logic;   -- mux b
+      branch_forward_a_o : out std_logic_vector (1 downto 0);  -- mux a 
+      branch_forward_b_o : out std_logic_vector (1 downto 0);   -- mux b
       -- kontrolni signal za resetovanje if/id registra
       if_id_flush_o      : out std_logic;
       -- kontrolni signali za zaustavljanje protocne obrade
@@ -47,8 +47,7 @@ entity control_path is
       
       -- proširenje do 32I
       rd_be_o: out std_logic_vector (1 downto 0); -- byte enable
-      sext_op_o: out std_logic_vector (1 downto 0); -- sign extend operand
-      mem_unsigned_o: out std_logic; -- bira izmedju lb i lbu (lh i lhu) u wb fazi
+      mem_unsigned_o: out std_logic; -- bira izmedju lb i lbu (lh i lhu) u mem fazi
       
       -- za LUI i JAL
       set_a_to_0_o: out std_logic;
@@ -171,6 +170,8 @@ begin
             set_a_to_0_ex_s <= '0';
             a_is_pc_ex_s <= '0';
             is_uncond_ex_s <= '0';
+            rs1_in_use_ex_s <= '0';
+            rs2_in_use_ex_s <= '0';
          else
             branch_ex_s      <= branch_id_s;
             funct7_ex_s      <= funct7_id_s;
@@ -186,6 +187,8 @@ begin
             set_a_to_0_ex_s <= set_a_to_0_id_s;
             a_is_pc_ex_s <= a_is_pc_id_s;
             is_uncond_ex_s <= is_uncond_id_s;
+            rs1_in_use_ex_s <= rs1_in_use_id_s;
+            rs2_in_use_ex_s <= rs2_in_use_id_s;
          end if;
       end if;
    end process;
@@ -218,14 +221,10 @@ begin
             rd_we_wb_s      <= '0';
             mem_to_reg_wb_s <= '0';
             rd_address_wb_s <= (others => '0');
-            rd_be_wb_s <= (others => '0');
-            mem_unsigned_wb_s <= '0';
          else
             rd_we_wb_s      <= rd_we_mem_s;
             mem_to_reg_wb_s <= mem_to_reg_mem_s;
             rd_address_wb_s <= rd_address_mem_s;
-            rd_be_wb_s <= rd_be_mem_s;
-            mem_unsigned_wb_s <= mem_unsigned_mem_s;
          end if;
       end if;
    end process;
@@ -271,7 +270,16 @@ begin
          alu_forward_a_o    => alu_forward_a_o,
          alu_forward_b_o    => alu_forward_b_o,
          branch_forward_a_o => branch_forward_a_o,
-         branch_forward_b_o => branch_forward_b_o);
+         branch_forward_b_o => branch_forward_b_o,
+         rd_we_ex_i => rd_we_ex_s,
+         rd_address_ex_i => rd_address_ex_s,
+         mem_to_reg_mem_i => mem_to_reg_mem_s,
+         rs1_in_use_id_i => rs1_in_use_id_s,
+         rs2_in_use_id_i => rs2_in_use_id_s,
+         rs1_in_use_ex_i => rs1_in_use_ex_s,
+         rs2_in_use_ex_i => rs2_in_use_ex_s
+         
+         );
 
    -- Jedinica za razresavanje hazarda
    hazard_u : entity work.hazard_unit(behavioral)
@@ -280,14 +288,10 @@ begin
          rs2_address_id_i => rs2_address_id_s,
          rs1_in_use_i     => rs1_in_use_id_s,
          rs2_in_use_i     => rs2_in_use_id_s,
-         branch_id_i      => branch_id_s,
 
          rd_address_ex_i => rd_address_ex_s,
          mem_to_reg_ex_i => mem_to_reg_ex_s,
          rd_we_ex_i      => rd_we_ex_s,
-
-         rd_address_mem_i => rd_address_mem_s,
-         mem_to_reg_mem_i => mem_to_reg_mem_s,
 
          pc_en_o        => pc_en_o,
          if_id_en_o     => if_id_en_s,
@@ -334,12 +338,10 @@ begin
                
     rd_be_o <= rd_be_mem_s;
     
-    sext_op_o <= rd_be_wb_s;
-    
     mem_unsigned_mem_s <= '1' when funct3_mem_s(2) = '1' else
                           '0';
                           
-    mem_unsigned_o <= mem_unsigned_wb_s;
+    mem_unsigned_o <= mem_unsigned_mem_s;
     
     -- LUI
     set_a_to_0_id_s <= '1' when instruction_i(6 downto 2) = "01101" else -- lui

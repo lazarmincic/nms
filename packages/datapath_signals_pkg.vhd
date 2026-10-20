@@ -56,8 +56,9 @@ package datapath_signals_pkg is
    signal data_mem_read_wb_s      : std_logic_vector (31 downto 0) := (others=>'0');
    
    -- prosirenje do 32I
-   signal data_mem_read_se_wb_s   : std_logic_vector (31 downto 0) := (others=>'0');
-   signal data_mem_read_ext_wb_s  : std_logic_vector (31 downto 0) := (others=>'0');
+   -- za lb, lh, lbu, lhu
+   signal data_mem_read_muxed_mem_s: std_logic_vector (31 downto 0) := (others=>'0');
+   signal data_mem_read_sext_mem_s : std_logic_vector (31 downto 0) := (others=>'0');
    
    signal branch_condition_s : std_logic := '0';
    
@@ -65,6 +66,8 @@ package datapath_signals_pkg is
    signal alu_out_s : std_logic_vector(31 downto 0) := (others=>'0');
    -- za jalr
    signal branch_adder_b_s: std_logic_vector(31 downto 0) := (others=>'0');
+   signal branch_adder_a_s: std_logic_vector(31 downto 0) := (others=>'0');
+   signal branch_adder_out_s:  std_logic_vector(31 downto 0) := (others=>'0');
 
 
 end package datapath_signals_pkg;

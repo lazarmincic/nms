@@ -64,9 +64,7 @@ package controlpath_signals_pkg is
    -- prosirenje do 32I
    
    signal rd_be_mem_s : std_logic_vector (1 downto 0) := (others=>'0');
-   signal rd_be_wb_s : std_logic_vector (1 downto 0) := (others=>'0');
    signal mem_unsigned_mem_s : std_logic := '0';
-   signal mem_unsigned_wb_s : std_logic := '0';
    
    -- LUI
    signal set_a_to_0_id_s: std_logic := '0';
@@ -78,6 +76,10 @@ package controlpath_signals_pkg is
    signal uncond_jump_id_s : std_logic := '0';
    signal is_uncond_id_s : std_logic := '0';
    signal is_uncond_ex_s : std_logic := '0';
+   -- forwarding unit dodatni signali
+   signal rs1_in_use_ex_s: std_logic := '0';
+   signal rs2_in_use_ex_s: std_logic := '0';
+   
    
 
 end package controlpath_signals_pkg;

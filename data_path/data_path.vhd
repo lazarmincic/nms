@@ -29,8 +29,8 @@ entity data_path is
       -- kontrolni signali za prosledjivanje operanada u ranije faze protocne obrade
       alu_forward_a_i     : in  std_logic_vector (1 downto 0);
       alu_forward_b_i     : in  std_logic_vector (1 downto 0);
-      branch_forward_a_i  : in  std_logic;
-      branch_forward_b_i  : in  std_logic;
+      branch_forward_a_i  : in  std_logic_vector(1 downto 0);
+      branch_forward_b_i  : in  std_logic_vector(1 downto 0);
       -- kontrolni signal za resetovanje if/id registra
       if_id_flush_i       : in  std_logic;
       -- kontrolni signali za zaustavljanje protocne obrade
@@ -52,8 +52,7 @@ entity data_path is
       
       -- prosirenje do 32I
       rd_be_i: in std_logic_vector (1 downto 0);
-      sext_op_i: in std_logic_vector (1 downto 0);
-      mem_unsigned_i: in std_logic; -- wb faza
+      mem_unsigned_i: in std_logic; -- mem faza
       
       -- za LUI
       set_a_to_0_i: in std_logic;
@@ -175,20 +174,35 @@ begin
    --***********  Kombinaciona logika  ***************
    -- sabirac za uvecavanje programskog brojaca (sledeca instrukcija)
    pc_adder_if_s <= std_logic_vector(unsigned(pc_reg_if_s) + to_unsigned(4, 32));
+   
+   -- izdvoji adrese opereanada iz 32-bitne instrukcije
+   rs1_address_id_s <= instruction_id_s(19 downto 15);
+   rs2_address_id_s <= instruction_id_s(24 downto 20);
+   rd_address_id_s  <= instruction_id_s(11 downto 7);
 
    -- multiplekser ispred sabiraca za uslovne skokove za jalr instrukciju
-   branch_adder_b_s <= pc_reg_id_s when branch_adder_sel_i = '0' else
-                       rs1_data_id_s;
+   branch_adder_b_s <= branch_condition_a_ex_s when branch_adder_sel_i = '1' else -- jalr
+                       pc_reg_id_s;  
+                       
+                       
+   branch_adder_a_s <= immediate_extended_id_s; -- jalr
                        
    -- sabirac za uslovne skokove               
-   branch_adder_id_s <= std_logic_vector(signed(immediate_extended_id_s) + signed(branch_adder_b_s));
+   branch_adder_out_s <= std_logic_vector(signed(branch_adder_a_s) + signed(branch_adder_b_s));
+   
+   branch_adder_id_s <= branch_adder_out_s(31 downto 1) & '0';
    
    branch_adder_id_o <= branch_adder_id_s;
 
    -- multiplekseri za prosledjivanje operanada komparatoru za proveravanje uslova za skok
-   branch_condition_a_ex_s <= alu_result_mem_s when branch_forward_a_i = '1' else
+   branch_condition_a_ex_s <= alu_result_mem_s when branch_forward_a_i = "01" else
+                              alu_result_ex_s  when branch_forward_a_i = "10" else
+                              data_mem_read_mem_s when branch_forward_a_i = "11" else
                               rs1_data_id_s;
-   branch_condition_b_ex_s <= alu_result_mem_s when branch_forward_b_i = '1' else
+                              
+   branch_condition_b_ex_s <= alu_result_mem_s when branch_forward_b_i = "01" else
+                              alu_result_ex_s  when branch_forward_b_i = "10" else
+                              data_mem_read_mem_s when branch_forward_a_i = "11" else
                               rs2_data_id_s;
 
    -- provera uslova za skok
@@ -217,12 +231,14 @@ begin
    -- ako je AUIPC, prosledi pc vrednost na a
    alu_forward_a_ex_s <= rd_data_wb_s when alu_forward_a_i = "01" else
                          alu_result_mem_s when alu_forward_a_i = "10" else
+                         data_mem_read_mem_s when alu_forward_a_i = "11" else
                          (others => '0') when set_a_to_0_i = '1' else
                          pc_reg_ex_s when a_is_pc_i = '1' else
                          rs1_data_ex_s;
                          
    alu_forward_b_ex_s <= rd_data_wb_s when alu_forward_b_i = "01" else
                          alu_result_mem_s when alu_forward_b_i = "10" else
+                         data_mem_read_mem_s when alu_forward_b_i = "11" else
                          rs2_data_ex_s;
 
    -- multiplekser za biranje 'b' operanda alu jedinice
@@ -232,19 +248,14 @@ begin
    a_ex_s <= alu_forward_a_ex_s;
    
    -- multiplekser koji bira na koji nacin se podatak procitan iz memorije
-   -- dopunjava do 32 bita (lh, lb, lhu, lbu)
-   data_mem_read_ext_wb_s <= data_mem_read_se_wb_s when mem_unsigned_i = '0' else
-                             data_mem_read_wb_s;
+   -- dopunjava do 32 bita (lh, lb, lhu, lbu) u mem fazi
+   data_mem_read_mem_s <= data_mem_read_muxed_mem_s when mem_unsigned_i = '1' else 
+                          data_mem_read_sext_mem_s;
+                          
 
    -- multiplekser koji selektuje sta se upisuje u odredisni registar
-   rd_data_wb_s <= data_mem_read_ext_wb_s when mem_to_reg_i = '1' else
+   rd_data_wb_s <= data_mem_read_wb_s when mem_to_reg_i = '1' else
                    alu_result_wb_s;
-
-   -- izdvoji adrese opereanada iz 32-bitne instrukcije
-   rs1_address_id_s <= instruction_id_s(19 downto 15);
-   rs2_address_id_s <= instruction_id_s(24 downto 20);
-   rd_address_id_s  <= instruction_id_s(11 downto 7);
-
 
 
 
@@ -285,9 +296,9 @@ begin
    -- sign extend (za lb, lh, lbu, lhu)
    sign_extend_1: entity work.sign_extend
         port map (
-            input_i => data_mem_read_wb_s,
-            output_o => data_mem_read_se_wb_s,
-            sext_op_i => sext_op_i
+            input_i => data_mem_read_muxed_mem_s,
+            output_o => data_mem_read_sext_mem_s,
+            sext_op_i => rd_be_i
         );
         
    -- podrska za instrukcije grananja
@@ -309,10 +320,10 @@ begin
    data_mem_address_o  <= alu_result_mem_s;
    data_mem_write_o    <= rs2_data_mem_s;
    
-   data_mem_read_mem_s <= (31 downto 8 => '0') & data_mem_read_i(7 downto 0) when rd_be_i = "00" else
-                          (31 downto 16 => '0') & data_mem_read_i(15 downto 0) when rd_be_i = "01" else
-                          data_mem_read_i    when rd_be_i = "10" else
-                          (others => '0');
+   data_mem_read_muxed_mem_s <= (31 downto 8 => '0') & data_mem_read_i(7 downto 0) when rd_be_i = "00" else
+                            (31 downto 16 => '0') & data_mem_read_i(15 downto 0) when rd_be_i = "01" else
+                            data_mem_read_i    when rd_be_i = "10" else
+                            (others => '0');
 
 end architecture;
 
