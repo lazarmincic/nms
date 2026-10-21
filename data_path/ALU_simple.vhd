@@ -38,7 +38,7 @@ BEGIN
              std_logic_vector(to_unsigned(0,WIDTH));
              
    -- pomeranje u levo
-   sll_res <= std_logic_vector(shift_left(unsigned(a_i), to_integer(unsigned(b_i))));
+   sll_res <= std_logic_vector(shift_left(unsigned(a_i), to_integer(unsigned(b_i(4 downto 0)))));
 
     -- set less than signed
    lts_res <= std_logic_vector(to_unsigned(1,WIDTH)) when signed(a_i) < signed(b_i) else
@@ -52,10 +52,10 @@ BEGIN
    xor_res <= a_i xor b_i;
    
    -- shift right logical
-   srl_res <= std_logic_vector(shift_right(unsigned(a_i), to_integer(unsigned(b_i))));
+   srl_res <= std_logic_vector(shift_right(unsigned(a_i), to_integer(unsigned(b_i(4 downto 0)))));
    
    -- shift right arithmetic
-   sra_res <= std_logic_vector(shift_right(signed(a_i), to_integer(unsigned(b_i))));
+   sra_res <= std_logic_vector(shift_right(signed(a_i), to_integer(unsigned(b_i(4 downto 0)))));
    
    
    -- prosledi jedan od rezultata na izlaz u odnosu na  operaciju

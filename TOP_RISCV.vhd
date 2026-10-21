@@ -31,8 +31,8 @@ architecture structural of TOP_RISCV is
 
    signal alu_forward_a_s    : std_logic_vector(1 downto 0);
    signal alu_forward_b_s    : std_logic_vector(1 downto 0);
-   signal branch_forward_a_s : std_logic_vector(1 downto 0);
-   signal branch_forward_b_s : std_logic_vector(1 downto 0);
+   signal branch_forward_a_s : std_logic;
+   signal branch_forward_b_s : std_logic;
    signal branch_condition_s : std_logic;
 
    signal pc_en_s            : std_logic;

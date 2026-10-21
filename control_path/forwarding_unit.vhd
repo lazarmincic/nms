@@ -21,13 +21,8 @@ entity forwarding_unit is
       alu_forward_a_o    : out std_logic_vector (1 downto 0);
       alu_forward_b_o    : out std_logic_vector(1 downto 0);
       -- izlazi za prosledjivanje operanada komparatoru za odredjivanje uslova skoka
-      branch_forward_a_o : out std_logic_vector (1 downto 0);
-      branch_forward_b_o : out std_logic_vector (1 downto 0);
-      -- prosledjivanje iz ex u id fazu za komparator za uslovne skokove
-      rd_we_ex_i: in std_logic;
-      rd_address_ex_i: in std_logic_vector (4 downto 0);
-      -- prosledjivanje iz mem u id ako je load bio u mem
-      mem_to_reg_mem_i: in std_logic;
+      branch_forward_a_o : out std_logic;
+      branch_forward_b_o : out std_logic;
       -- in use signali
       rs1_in_use_id_i: in std_logic;
       rs2_in_use_id_i: in std_logic;
@@ -44,8 +39,7 @@ begin
    -- prosledjivanje iz MEM faze ima veci prioritet od prosledjivanja iz WB faze,
    -- zato sto je vrednost novija ('svezija')
    forward_proc : process(rd_we_mem_i, rd_address_mem_i, rd_we_wb_i, rd_address_wb_i,
-                          rs1_address_ex_i, rs2_address_ex_i, rs1_in_use_ex_i, rs2_in_use_ex_i, 
-                          mem_to_reg_mem_i
+                          rs1_address_ex_i, rs2_address_ex_i, rs1_in_use_ex_i, rs2_in_use_ex_i
                           ) is
    begin
       alu_forward_a_o <= "00";
@@ -63,56 +57,30 @@ begin
       if (rd_we_mem_i = '1' and rd_address_mem_i /= zero_c)then
          if (rd_address_mem_i = rs1_address_ex_i and rs1_in_use_ex_i = '1')then
             alu_forward_a_o <= "10";
-            if (mem_to_reg_mem_i = '1') then
-                alu_forward_a_o <= "11";
-            end if;
          end if;
          if (rd_address_mem_i = rs2_address_ex_i and rs2_in_use_ex_i = '1')then
             alu_forward_b_o <= "10";
-            if (mem_to_reg_mem_i = '1') then
-                alu_forward_b_o <= "11";
-            end if;
          end if;
       end if;
    end process;
 
    -- proces koji kontrolise da li je potrebno prosledjivanje operanada komparatoru za uslovne skokove
-   -- prosledjivanje iz EX faze ima veci prioritet od prosledjivanja iz MEM faze,
-   -- zato sto je vrednost novija ('svezija')
+   -- samo prosleđivanje iz MEM faze
    
-   -- podrska za branch predictor - moze da se desi situacija da je
-   -- potrebno prosledjivanje komparatoru iz ex faze u id fazu
-   
-   forward_branch_proc : process(rd_we_mem_i, rd_address_mem_i, rd_we_ex_i, rd_address_ex_i,
-                                 rs1_address_id_i, rs2_address_id_i, mem_to_reg_mem_i,
+   forward_branch_proc : process(rd_we_mem_i, rd_address_mem_i,
+                                 rs1_address_id_i, rs2_address_id_i,
                                  rs1_in_use_id_i, rs2_in_use_id_i) is
    begin
-      branch_forward_b_o <= "00";
-      branch_forward_a_o <= "00";      
+      branch_forward_b_o <= '0';
+      branch_forward_a_o <= '0';      
       
       -- prosledjivanje signala iz MEM faze
       if (rd_we_mem_i = '1' and rd_address_mem_i /= zero_c)then
          if (rd_address_mem_i = rs1_address_id_i and rs1_in_use_id_i = '1')then
-            branch_forward_a_o <= "01"; 
-            if (mem_to_reg_mem_i = '1') then    -- prosledjivanje iz MEM za load instr. u MEM
-                branch_forward_a_o <= "11"; 
-            end if;
+            branch_forward_a_o <= '1'; 
          end if;
          if (rd_address_mem_i = rs2_address_id_i and rs2_in_use_id_i = '1')then
-            branch_forward_b_o <= "01";
-            if (mem_to_reg_mem_i = '1') then
-                branch_forward_b_o <= "11"; 
-            end if;
-         end if;
-      end if;
-      
-      -- prosleđivanje iz EX faze (veci prioritet)
-      if (rd_we_ex_i = '1' and rd_address_ex_i /= zero_c) then
-        if (rd_address_ex_i = rs1_address_id_i and rs1_in_use_id_i = '1') then
-            branch_forward_a_o <= "10";
-         end if;
-         if (rd_address_ex_i = rs2_address_id_i and rs2_in_use_id_i = '1') then
-            branch_forward_b_o <= "10";
+            branch_forward_b_o <= '1';
          end if;
       end if;
    end process;

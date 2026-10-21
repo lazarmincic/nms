@@ -29,8 +29,8 @@ entity data_path is
       -- kontrolni signali za prosledjivanje operanada u ranije faze protocne obrade
       alu_forward_a_i     : in  std_logic_vector (1 downto 0);
       alu_forward_b_i     : in  std_logic_vector (1 downto 0);
-      branch_forward_a_i  : in  std_logic_vector(1 downto 0);
-      branch_forward_b_i  : in  std_logic_vector(1 downto 0);
+      branch_forward_a_i  : in  std_logic;
+      branch_forward_b_i  : in  std_logic;
       -- kontrolni signal za resetovanje if/id registra
       if_id_flush_i       : in  std_logic;
       -- kontrolni signali za zaustavljanje protocne obrade
@@ -195,14 +195,10 @@ begin
    branch_adder_id_o <= branch_adder_id_s;
 
    -- multiplekseri za prosledjivanje operanada komparatoru za proveravanje uslova za skok
-   branch_condition_a_ex_s <= alu_result_mem_s when branch_forward_a_i = "01" else
-                              alu_result_ex_s  when branch_forward_a_i = "10" else
-                              data_mem_read_mem_s when branch_forward_a_i = "11" else
+   branch_condition_a_ex_s <= alu_result_mem_s when branch_forward_a_i = '1' else
                               rs1_data_id_s;
                               
-   branch_condition_b_ex_s <= alu_result_mem_s when branch_forward_b_i = "01" else
-                              alu_result_ex_s  when branch_forward_b_i = "10" else
-                              data_mem_read_mem_s when branch_forward_a_i = "11" else
+   branch_condition_b_ex_s <= alu_result_mem_s when branch_forward_b_i = '1' else
                               rs2_data_id_s;
 
    -- provera uslova za skok
@@ -231,14 +227,12 @@ begin
    -- ako je AUIPC, prosledi pc vrednost na a
    alu_forward_a_ex_s <= rd_data_wb_s when alu_forward_a_i = "01" else
                          alu_result_mem_s when alu_forward_a_i = "10" else
-                         data_mem_read_mem_s when alu_forward_a_i = "11" else
                          (others => '0') when set_a_to_0_i = '1' else
                          pc_reg_ex_s when a_is_pc_i = '1' else
                          rs1_data_ex_s;
                          
    alu_forward_b_ex_s <= rd_data_wb_s when alu_forward_b_i = "01" else
                          alu_result_mem_s when alu_forward_b_i = "10" else
-                         data_mem_read_mem_s when alu_forward_b_i = "11" else
                          rs2_data_ex_s;
 
    -- multiplekser za biranje 'b' operanda alu jedinice

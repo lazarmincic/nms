@@ -22,8 +22,8 @@ entity control_path is
       -- kontrolni signali za prosledjivanje operanada u ranije faze protocne obrade
       alu_forward_a_o    : out std_logic_vector (1 downto 0);
       alu_forward_b_o    : out std_logic_vector (1 downto 0);
-      branch_forward_a_o : out std_logic_vector (1 downto 0);  -- mux a 
-      branch_forward_b_o : out std_logic_vector (1 downto 0);   -- mux b
+      branch_forward_a_o : out std_logic;  -- mux a 
+      branch_forward_b_o : out std_logic;   -- mux b
       -- kontrolni signal za resetovanje if/id registra
       if_id_flush_o      : out std_logic;
       -- kontrolni signali za zaustavljanje protocne obrade
@@ -94,8 +94,10 @@ begin
    -- branch_condition_i je ulaz iz data path-a koji govori da li se skok desio
    -- za uslovne skokove
    
-   uncond_jump_id_s <= '1' when instruction_i(6 downto 2) = "11011" 
-                             or instruction_i(6 downto 2) = "11001" else
+   jalr_id_s <= '1' when instruction_i(6 downto 2) = "11001" else
+                '0';
+   
+   uncond_jump_id_s <= '1' when instruction_i(6 downto 2) = "11011" or jalr_id_s = '1' else
                        '0';
                      
    pc_next_if_s : process(branch_id_s, branch_condition_i, bcc_id_s, pred_taken_s, pred_taken_id_i,
@@ -271,9 +273,6 @@ begin
          alu_forward_b_o    => alu_forward_b_o,
          branch_forward_a_o => branch_forward_a_o,
          branch_forward_b_o => branch_forward_b_o,
-         rd_we_ex_i => rd_we_ex_s,
-         rd_address_ex_i => rd_address_ex_s,
-         mem_to_reg_mem_i => mem_to_reg_mem_s,
          rs1_in_use_id_i => rs1_in_use_id_s,
          rs2_in_use_id_i => rs2_in_use_id_s,
          rs1_in_use_ex_i => rs1_in_use_ex_s,
@@ -288,10 +287,15 @@ begin
          rs2_address_id_i => rs2_address_id_s,
          rs1_in_use_i     => rs1_in_use_id_s,
          rs2_in_use_i     => rs2_in_use_id_s,
+         branch_id_i      => branch_id_s,
+         jalr_id_i => jalr_id_s,
 
          rd_address_ex_i => rd_address_ex_s,
          mem_to_reg_ex_i => mem_to_reg_ex_s,
          rd_we_ex_i      => rd_we_ex_s,
+
+         rd_address_mem_i => rd_address_mem_s,
+         mem_to_reg_mem_i => mem_to_reg_mem_s,
 
          pc_en_o        => pc_en_o,
          if_id_en_o     => if_id_en_s,
@@ -363,8 +367,8 @@ begin
     is_uncond_o <= is_uncond_ex_s;
     
     -- jalr
-    branch_adder_sel_o <= '1' when instruction_i(6 downto 2) = "11001" else -- jalr
-                          '0';
+    branch_adder_sel_o <= jalr_id_s; -- jalr
+                          
     
 
 end architecture;

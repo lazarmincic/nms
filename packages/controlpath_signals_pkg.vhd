@@ -79,6 +79,8 @@ package controlpath_signals_pkg is
    -- forwarding unit dodatni signali
    signal rs1_in_use_ex_s: std_logic := '0';
    signal rs2_in_use_ex_s: std_logic := '0';
+   -- jalr u id fazi
+   signal jalr_id_s: std_logic := '0';
    
    
 

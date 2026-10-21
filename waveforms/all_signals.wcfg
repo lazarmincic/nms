@@ -14,12 +14,12 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="401.850 ns"></ZoomStartTime>
-      <ZoomEndTime time="2,809.851 ns"></ZoomEndTime>
-      <Cursor1Time time="1,089.850 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="9.000001 us"></ZoomEndTime>
+      <Cursor1Time time="9.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="264"></NameColumnWidth>
+      <NameColumnWidth column_width="252"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="20" />
@@ -34,6 +34,7 @@
    <wvobject type="group" fp_name="group1450">
       <obj_property name="label">instruction_mem</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/instruction_mem/en_a_i">
          <obj_property name="ElementShortName">en_a_i</obj_property>
          <obj_property name="ObjectShortName">en_a_i</obj_property>
@@ -140,7 +141,6 @@
    <wvobject type="group" fp_name="group245">
       <obj_property name="label">datapath_signals</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/datapath_signals_pkg/pc_reg_if_s">
          <obj_property name="ElementShortName">pc_reg_if_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">pc_reg_if_s[31:0]</obj_property>
@@ -314,9 +314,17 @@
          <obj_property name="ElementShortName">data_mem_read_wb_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">data_mem_read_wb_s[31:0]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/datapath_signals_pkg/data_mem_read_se_wb_s">
-         <obj_property name="ElementShortName">data_mem_read_se_wb_s[31:0]</obj_property>
-         <obj_property name="ObjectShortName">data_mem_read_se_wb_s[31:0]</obj_property>
+      <wvobject type="array" fp_name="/datapath_signals_pkg/branch_adder_a_s">
+         <obj_property name="ElementShortName">branch_adder_a_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_adder_a_s[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/datapath_signals_pkg/branch_adder_b_s">
+         <obj_property name="ElementShortName">branch_adder_b_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_adder_b_s[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/datapath_signals_pkg/branch_adder_out_s">
+         <obj_property name="ElementShortName">branch_adder_out_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_adder_out_s[31:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group1478">
@@ -454,14 +462,11 @@
          <obj_property name="ElementShortName">rd_be_i[1:0]</obj_property>
          <obj_property name="ObjectShortName">rd_be_i[1:0]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/sext_op_i">
-         <obj_property name="ElementShortName">sext_op_i[1:0]</obj_property>
-         <obj_property name="ObjectShortName">sext_op_i[1:0]</obj_property>
-      </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group88">
       <obj_property name="label">register_bank</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/register_bank_1/rs1_address_i">
          <obj_property name="ElementShortName">rs1_address_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">rs1_address_i[4:0]</obj_property>
@@ -814,10 +819,6 @@
          <obj_property name="ElementShortName">rd_be_mem_s[1:0]</obj_property>
          <obj_property name="ObjectShortName">rd_be_mem_s[1:0]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/controlpath_signals_pkg/rd_be_wb_s">
-         <obj_property name="ElementShortName">rd_be_wb_s[1:0]</obj_property>
-         <obj_property name="ObjectShortName">rd_be_wb_s[1:0]</obj_property>
-      </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group126">
       <obj_property name="label">control_path</obj_property>
@@ -1085,10 +1086,6 @@
          <obj_property name="ElementShortName">rs2_in_use_i</obj_property>
          <obj_property name="ObjectShortName">rs2_in_use_i</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/branch_id_i">
-         <obj_property name="ElementShortName">branch_id_i</obj_property>
-         <obj_property name="ObjectShortName">branch_id_i</obj_property>
-      </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/rd_address_ex_i">
          <obj_property name="ElementShortName">rd_address_ex_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">rd_address_ex_i[4:0]</obj_property>
@@ -1100,14 +1097,6 @@
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/rd_we_ex_i">
          <obj_property name="ElementShortName">rd_we_ex_i</obj_property>
          <obj_property name="ObjectShortName">rd_we_ex_i</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/rd_address_mem_i">
-         <obj_property name="ElementShortName">rd_address_mem_i[4:0]</obj_property>
-         <obj_property name="ObjectShortName">rd_address_mem_i[4:0]</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/mem_to_reg_mem_i">
-         <obj_property name="ElementShortName">mem_to_reg_mem_i</obj_property>
-         <obj_property name="ObjectShortName">mem_to_reg_mem_i</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/pc_en_o">
          <obj_property name="ElementShortName">pc_en_o</obj_property>
