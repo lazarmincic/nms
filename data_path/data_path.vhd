@@ -40,11 +40,6 @@ entity data_path is
       branch_adder_id_o : out std_logic_vector (31 downto 0);
       -- ulaz iz branch predict jedinice (adresa skoka iz btb-a)
       pred_address_i : in std_logic_vector (31 downto 0);
-      -- ulaz iz BPU - predviđen ishod skoka
-      pred_taken_i : in std_logic;
-      
-      pred_taken_id_o : out std_logic;
-      pred_target_id_o : out std_logic_vector (31 downto 0);
       
       pc_id_o : out std_logic_vector (31 downto 0);
       
@@ -92,22 +87,18 @@ begin
    if_id : process (clk) is
    begin
       if (rising_edge(clk)) then
-         if(if_id_en_i = '1')then
+        if(if_id_en_i = '1')then
             if (reset = '0' or if_id_flush_i = '1')then
                pc_reg_id_s      <= (others => '0');
                pc_adder_id_s    <= (others => '0');
                instruction_id_s <= (others => '0');
-               pred_taken_id_s <= '0';
-               pred_target_id_s <= (others => '0');
-            else
+            else 
                pc_reg_id_s      <= pc_reg_if_s;
                pc_adder_id_s    <= pc_adder_if_s;
                instruction_id_s <= instruction_if_s;
-               pred_taken_id_s <= pred_taken_i;
-               pred_target_id_s <= pred_address_i;
-            end if;
+            end if; 
          end if;
-      end if;
+       end if;
    end process;
 
    --ID/EX registar
@@ -212,9 +203,6 @@ begin
       pc_adder_id_s                 when "11",
       (others => '0')               when others;
       
-   -- izlaz ka control path-u (samo provučeni kroz if id registar)
-   pred_taken_id_o <= pred_taken_id_s;
-   pred_target_id_o <= pred_target_id_s;
    
    pc_id_o <= pc_reg_id_s;
    

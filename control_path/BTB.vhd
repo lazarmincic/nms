@@ -20,7 +20,9 @@ entity BTB is
         tag_i : in std_logic_vector (32-2-WIDTH-1 downto 0);
         we_i : in std_logic;
         valid_o: out std_logic;
-        en_i: in std_logic
+        en_i: in std_logic;
+        branch_type_i: in std_logic_vector (1 downto 0);
+        branch_type_o: out std_logic_vector (1 downto 0)
     );
 end BTB;
 
@@ -29,7 +31,11 @@ architecture behavioral of BTB is
    signal target_s : target_type := (others => (others => '0'));
    type tag_type is array (0 to 2**WIDTH - 1) of std_logic_vector (32-2-WIDTH-1 downto 0);
    signal tag_s : tag_type := (others => (others => '0'));
-   signal valid_s : std_logic_vector (2**WIDTH - 1 downto 0) := (others => '0');
+   signal valid_s : std_logic_vector (0 to 2**WIDTH - 1) := (others => '0');
+   constant cond: std_logic := '0';
+   constant uncond: std_logic := '1';
+   type branch_type_t  is array (0 to 2**WIDTH - 1) of std_logic_vector (1 downto 0);
+   signal branch_type_s : branch_type_t := (others => (others => '0')); --meta podaci, tip skoka
 begin
 
     -- sinhroni upis
@@ -42,14 +48,16 @@ begin
                 target_s(to_integer(unsigned(wr_address_i))) <= target_i;
                 tag_s(to_integer(unsigned(wr_address_i))) <= tag_i;
                 valid_s(to_integer(unsigned(wr_address_i))) <= '1';
+                branch_type_s(to_integer(unsigned(wr_address_i))) <= branch_type_i;
             end if;
         end if;
     end process;
     
     -- asinhrono citanje
-    target_o <= target_s (to_integer(unsigned(rd_address_i))) when en_i = '1' else (others => '0');
-    tag_o <= tag_s (to_integer(unsigned(rd_address_i))) when en_i = '1' else (others => '0');
-    valid_o <= valid_s (to_integer(unsigned(rd_address_i))) when en_i = '1' else '0';
+    target_o <= target_s (to_integer(unsigned(rd_address_i)));
+    tag_o <= tag_s (to_integer(unsigned(rd_address_i)));
+    valid_o <= valid_s (to_integer(unsigned(rd_address_i)));
+    branch_type_o <= branch_type_s (to_integer(unsigned(rd_address_i)));
     
 
 end architecture;

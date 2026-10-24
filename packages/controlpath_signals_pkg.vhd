@@ -81,7 +81,19 @@ package controlpath_signals_pkg is
    signal rs2_in_use_ex_s: std_logic := '0';
    -- jalr u id fazi
    signal jalr_id_s: std_logic := '0';
-   
+   signal jal_id_s: std_logic := '0';
+   -- za branch predictor
+   signal branch_type_id_s : std_logic_vector (1 downto 0) := (others=>'0'); -- ulaz u bp
+   signal branch_type_if_s: std_logic_vector (1 downto 0) := (others=>'0'); -- izlaz iz bp
+   signal pred_address_id_s: std_logic_vector (31 downto 0) := (others=>'0');
+   signal pred_taken_id_s: std_logic := '0';
+   signal branch_taken_id_s: std_logic := '0';
+   signal bp_address_match_s : std_logic := '0';
+   signal bp_taken_match_s: std_logic := '0';
+   signal btb_hit_s: std_logic := '0';
+   signal btb_hit_id_s: std_logic := '0';
+   signal is_ind_s : std_logic := '0';
+   signal ind_bht_we_s: std_logic := '0';
    
 
 end package controlpath_signals_pkg;

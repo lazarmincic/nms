@@ -18,7 +18,12 @@ entity branch_predict_unit is
         target_addr_id_i: in std_logic_vector (31 downto 0);
         btb_bht_we_i : in std_logic_vector (1 downto 0);
         branch_taken_id_i : in std_logic;
-        en_i : in std_logic
+        en_i : in std_logic;
+        branch_type_i: in std_logic_vector (1 downto 0);
+        branch_type_o: out std_logic_vector (1 downto 0);
+        btb_hit_o: out std_logic;
+        ind_bht_we_i: in std_logic
+        
     );
 end entity;
 
@@ -34,9 +39,13 @@ architecture Behavioral of branch_predict_unit is
     signal btb_hit: std_logic;
     signal bht_taken: std_logic;
     signal bht_we : std_logic ;
+    signal ind_bht_taken: std_logic;
+    signal is_ind_s: std_logic; -- indirect branch (jalr)
+    signal branch_type_s: std_logic_vector (1 downto 0);
+
 begin
 
-    -- treba promeniti u gshare tip (ovo je smit)
+    -- Jim Smith P.B.
 
     -- IF faza (data path a) - citanje
     rd_index <= pc_if_i (BTB_ADDR_WIDTH+2-1 downto 2);
@@ -65,11 +74,14 @@ begin
             tag_i => wr_tag,
             we_i => btb_we,
             valid_o => target_valid,
-            en_i => en_i
+            en_i => en_i,
+            branch_type_i => branch_type_i,
+            branch_type_o => branch_type_s
         );
     
-    btb_hit <= '1' when (rd_tag = target_tag) and target_valid = '1'
-          else '0';
+    
+    btb_hit <= '1' when rd_tag = target_tag and target_valid = '1' else
+               '0';
           
     pred_address_o <= target_addr;
     
@@ -91,6 +103,33 @@ begin
             en_i => en_i
         );
         
-    pred_taken_o <= bht_taken and btb_hit ;
+    ind_bht: entity work.BHT -- histerezis za jalr (ind)
+        generic map (
+            CNT_WIDTH => 1,
+            AWIDTH => BTB_ADDR_WIDTH
+        )
+        port map (
+            clk => clk,
+            reset => reset,
+            rd_addr_i => rd_index,
+            taken_o => ind_bht_taken,
+            wr_addr_i => wr_index,
+            taken_i => branch_taken_id_i,
+            we_i => ind_bht_we_i, 
+            en_i => en_i
+        );
+        
+        
+    branch_type_o <= branch_type_s;
+    
+    is_ind_s <= '1' when branch_type_s = "10" else '0'; -- jalr
+        
+    with is_ind_s select
+        pred_taken_o <= bht_taken and btb_hit when '0',
+                        ind_bht_taken and btb_hit when '1',
+                        '0' when others;
+    
+    btb_hit_o <= btb_hit; -- za jal
+    
 
 end architecture;

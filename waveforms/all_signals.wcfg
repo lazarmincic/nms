@@ -15,14 +15,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="9.000001 us"></ZoomEndTime>
-      <Cursor1Time time="9.000000 us"></Cursor1Time>
+      <ZoomEndTime time="12.921571 us"></ZoomEndTime>
+      <Cursor1Time time="4.176471 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="252"></NameColumnWidth>
+      <NameColumnWidth column_width="240"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="20" />
+   <WVObjectSize size="21" />
    <wvobject type="logic" fp_name="/TOP_RISCV_tb/instruction_mem/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -34,7 +34,6 @@
    <wvobject type="group" fp_name="group1450">
       <obj_property name="label">instruction_mem</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/instruction_mem/en_a_i">
          <obj_property name="ElementShortName">en_a_i</obj_property>
          <obj_property name="ObjectShortName">en_a_i</obj_property>
@@ -160,8 +159,6 @@
       <wvobject type="array" fp_name="/datapath_signals_pkg/instruction_id_s">
          <obj_property name="ElementShortName">instruction_id_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">instruction_id_s[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/pc_adder_id_s">
          <obj_property name="ElementShortName">pc_adder_id_s[31:0]</obj_property>
@@ -182,7 +179,6 @@
       <wvobject type="array" fp_name="/datapath_signals_pkg/immediate_extended_id_s">
          <obj_property name="ElementShortName">immediate_extended_id_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">immediate_extended_id_s[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/branch_condition_b_ex_s">
          <obj_property name="ElementShortName">branch_condition_b_ex_s[31:0]</obj_property>
@@ -195,8 +191,6 @@
       <wvobject type="array" fp_name="/datapath_signals_pkg/branch_adder_id_s">
          <obj_property name="ElementShortName">branch_adder_id_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">branch_adder_id_s[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/rs1_address_id_s">
          <obj_property name="ElementShortName">rs1_address_id_s[4:0]</obj_property>
@@ -213,14 +207,6 @@
       <wvobject type="logic" fp_name="/datapath_signals_pkg/if_id_reg_flush_s">
          <obj_property name="ElementShortName">if_id_reg_flush_s</obj_property>
          <obj_property name="ObjectShortName">if_id_reg_flush_s</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/datapath_signals_pkg/pred_taken_id_s">
-         <obj_property name="ElementShortName">pred_taken_id_s</obj_property>
-         <obj_property name="ObjectShortName">pred_taken_id_s</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/datapath_signals_pkg/pred_target_id_s">
-         <obj_property name="ElementShortName">pred_target_id_s[31:0]</obj_property>
-         <obj_property name="ObjectShortName">pred_target_id_s[31:0]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/pc_adder_ex_s">
          <obj_property name="ElementShortName">pc_adder_ex_s[31:0]</obj_property>
@@ -249,17 +235,14 @@
       <wvobject type="array" fp_name="/datapath_signals_pkg/b_ex_s">
          <obj_property name="ElementShortName">b_ex_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">b_ex_s[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/a_ex_s">
          <obj_property name="ElementShortName">a_ex_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">a_ex_s[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/alu_result_ex_s">
          <obj_property name="ElementShortName">alu_result_ex_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">alu_result_ex_s[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/rs1_data_ex_s">
          <obj_property name="ElementShortName">rs1_data_ex_s[31:0]</obj_property>
@@ -273,6 +256,10 @@
          <obj_property name="ElementShortName">rd_address_ex_s[4:0]</obj_property>
          <obj_property name="ObjectShortName">rd_address_ex_s[4:0]</obj_property>
       </wvobject>
+      <wvobject type="array" fp_name="/datapath_signals_pkg/pc_reg_ex_s">
+         <obj_property name="ElementShortName">pc_reg_ex_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">pc_reg_ex_s[31:0]</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/pc_adder_mem_s">
          <obj_property name="ElementShortName">pc_adder_mem_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">pc_adder_mem_s[31:0]</obj_property>
@@ -280,7 +267,6 @@
       <wvobject type="array" fp_name="/datapath_signals_pkg/alu_result_mem_s">
          <obj_property name="ElementShortName">alu_result_mem_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">alu_result_mem_s[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/rd_address_mem_s">
          <obj_property name="ElementShortName">rd_address_mem_s[4:0]</obj_property>
@@ -314,13 +300,29 @@
          <obj_property name="ElementShortName">data_mem_read_wb_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">data_mem_read_wb_s[31:0]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/datapath_signals_pkg/branch_adder_a_s">
-         <obj_property name="ElementShortName">branch_adder_a_s[31:0]</obj_property>
-         <obj_property name="ObjectShortName">branch_adder_a_s[31:0]</obj_property>
+      <wvobject type="array" fp_name="/datapath_signals_pkg/data_mem_read_muxed_mem_s">
+         <obj_property name="ElementShortName">data_mem_read_muxed_mem_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">data_mem_read_muxed_mem_s[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/datapath_signals_pkg/data_mem_read_sext_mem_s">
+         <obj_property name="ElementShortName">data_mem_read_sext_mem_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">data_mem_read_sext_mem_s[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/datapath_signals_pkg/branch_condition_s">
+         <obj_property name="ElementShortName">branch_condition_s</obj_property>
+         <obj_property name="ObjectShortName">branch_condition_s</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/datapath_signals_pkg/alu_out_s">
+         <obj_property name="ElementShortName">alu_out_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">alu_out_s[31:0]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/branch_adder_b_s">
          <obj_property name="ElementShortName">branch_adder_b_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">branch_adder_b_s[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/datapath_signals_pkg/branch_adder_a_s">
+         <obj_property name="ElementShortName">branch_adder_a_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_adder_a_s[31:0]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/datapath_signals_pkg/branch_adder_out_s">
          <obj_property name="ElementShortName">branch_adder_out_s[31:0]</obj_property>
@@ -330,17 +332,21 @@
    <wvobject type="group" fp_name="group1478">
       <obj_property name="label">data_path</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/instr_mem_address_o">
          <obj_property name="ElementShortName">instr_mem_address_o[31:0]</obj_property>
          <obj_property name="ObjectShortName">instr_mem_address_o[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/instr_mem_read_i">
          <obj_property name="ElementShortName">instr_mem_read_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">instr_mem_read_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/instruction_o">
          <obj_property name="ElementShortName">instruction_o[31:0]</obj_property>
@@ -373,8 +379,6 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/pc_next_sel_i">
          <obj_property name="ElementShortName">pc_next_sel_i[1:0]</obj_property>
          <obj_property name="ObjectShortName">pc_next_sel_i[1:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/rd_we_i">
          <obj_property name="ElementShortName">rd_we_i</obj_property>
@@ -383,8 +387,6 @@
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/branch_condition_o">
          <obj_property name="ElementShortName">branch_condition_o</obj_property>
          <obj_property name="ObjectShortName">branch_condition_o</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/alu_forward_a_i">
          <obj_property name="ElementShortName">alu_forward_a_i[1:0]</obj_property>
@@ -405,8 +407,6 @@
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/if_id_flush_i">
          <obj_property name="ElementShortName">if_id_flush_i</obj_property>
          <obj_property name="ObjectShortName">if_id_flush_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/pc_en_i">
          <obj_property name="ElementShortName">pc_en_i</obj_property>
@@ -419,54 +419,51 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/branch_adder_id_o">
          <obj_property name="ElementShortName">branch_adder_id_o[31:0]</obj_property>
          <obj_property name="ObjectShortName">branch_adder_id_o[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/pred_address_i">
          <obj_property name="ElementShortName">pred_address_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">pred_address_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/pred_taken_i">
-         <obj_property name="ElementShortName">pred_taken_i</obj_property>
-         <obj_property name="ObjectShortName">pred_taken_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/pred_taken_id_o">
-         <obj_property name="ElementShortName">pred_taken_id_o</obj_property>
-         <obj_property name="ObjectShortName">pred_taken_id_o</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/pred_target_id_o">
-         <obj_property name="ElementShortName">pred_target_id_o[31:0]</obj_property>
-         <obj_property name="ObjectShortName">pred_target_id_o[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/pc_id_o">
          <obj_property name="ElementShortName">pc_id_o[31:0]</obj_property>
          <obj_property name="ObjectShortName">pc_id_o[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/id_ex_flush_i">
          <obj_property name="ElementShortName">id_ex_flush_i</obj_property>
          <obj_property name="ObjectShortName">id_ex_flush_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/rd_be_i">
          <obj_property name="ElementShortName">rd_be_i[1:0]</obj_property>
          <obj_property name="ObjectShortName">rd_be_i[1:0]</obj_property>
       </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/mem_unsigned_i">
+         <obj_property name="ElementShortName">mem_unsigned_i</obj_property>
+         <obj_property name="ObjectShortName">mem_unsigned_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/set_a_to_0_i">
+         <obj_property name="ElementShortName">set_a_to_0_i</obj_property>
+         <obj_property name="ObjectShortName">set_a_to_0_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/a_is_pc_i">
+         <obj_property name="ElementShortName">a_is_pc_i</obj_property>
+         <obj_property name="ObjectShortName">a_is_pc_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/branch_op_i">
+         <obj_property name="ElementShortName">branch_op_i[2:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_op_i[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/is_uncond_i">
+         <obj_property name="ElementShortName">is_uncond_i</obj_property>
+         <obj_property name="ObjectShortName">is_uncond_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/branch_adder_sel_i">
+         <obj_property name="ElementShortName">branch_adder_sel_i</obj_property>
+         <obj_property name="ObjectShortName">branch_adder_sel_i</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group88">
       <obj_property name="label">register_bank</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/register_bank_1/rs1_address_i">
          <obj_property name="ElementShortName">rs1_address_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">rs1_address_i[4:0]</obj_property>
@@ -498,7 +495,6 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/register_bank_1/reg_bank_s">
          <obj_property name="ElementShortName">reg_bank_s[0:31][31:0]</obj_property>
          <obj_property name="ObjectShortName">reg_bank_s[0:31][31:0]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/register_bank_1/WIDTH">
          <obj_property name="ElementShortName">WIDTH</obj_property>
@@ -515,7 +511,6 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/immediate_1/immediate_extended_o">
          <obj_property name="ElementShortName">immediate_extended_o[31:0]</obj_property>
          <obj_property name="ObjectShortName">immediate_extended_o[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/immediate_1/opcode">
          <obj_property name="ElementShortName">opcode[6:0]</obj_property>
@@ -549,6 +544,18 @@
          <obj_property name="ElementShortName">b_type_instruction[2:0]</obj_property>
          <obj_property name="ObjectShortName">b_type_instruction[2:0]</obj_property>
       </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/immediate_1/u_type_instruction">
+         <obj_property name="ElementShortName">u_type_instruction[2:0]</obj_property>
+         <obj_property name="ObjectShortName">u_type_instruction[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/immediate_1/j_type_instruction">
+         <obj_property name="ElementShortName">j_type_instruction[2:0]</obj_property>
+         <obj_property name="ObjectShortName">j_type_instruction[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/immediate_1/shamt_instruction">
+         <obj_property name="ElementShortName">shamt_instruction[2:0]</obj_property>
+         <obj_property name="ObjectShortName">shamt_instruction[2:0]</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group111">
       <obj_property name="label">ALU</obj_property>
@@ -556,12 +563,10 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/a_i">
          <obj_property name="ElementShortName">a_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">a_i[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/b_i">
          <obj_property name="ElementShortName">b_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">b_i[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/data_path_1/ALU_1/op_i">
          <obj_property name="ElementShortName">op_i[4:0]</obj_property>
@@ -787,6 +792,10 @@
          <obj_property name="ElementShortName">rd_address_mem_s[4:0]</obj_property>
          <obj_property name="ObjectShortName">rd_address_mem_s[4:0]</obj_property>
       </wvobject>
+      <wvobject type="array" fp_name="/controlpath_signals_pkg/funct3_mem_s">
+         <obj_property name="ElementShortName">funct3_mem_s[2:0]</obj_property>
+         <obj_property name="ObjectShortName">funct3_mem_s[2:0]</obj_property>
+      </wvobject>
       <wvobject type="logic" fp_name="/controlpath_signals_pkg/rd_we_wb_s">
          <obj_property name="ElementShortName">rd_we_wb_s</obj_property>
          <obj_property name="ObjectShortName">rd_we_wb_s</obj_property>
@@ -811,6 +820,10 @@
          <obj_property name="ElementShortName">pred_address_s[31:0]</obj_property>
          <obj_property name="ObjectShortName">pred_address_s[31:0]</obj_property>
       </wvobject>
+      <wvobject type="array" fp_name="/controlpath_signals_pkg/btb_bht_we_s">
+         <obj_property name="ElementShortName">btb_bht_we_s[1:0]</obj_property>
+         <obj_property name="ObjectShortName">btb_bht_we_s[1:0]</obj_property>
+      </wvobject>
       <wvobject type="logic" fp_name="/controlpath_signals_pkg/bpu_en_s">
          <obj_property name="ElementShortName">bpu_en_s</obj_property>
          <obj_property name="ObjectShortName">bpu_en_s</obj_property>
@@ -819,10 +832,110 @@
          <obj_property name="ElementShortName">rd_be_mem_s[1:0]</obj_property>
          <obj_property name="ObjectShortName">rd_be_mem_s[1:0]</obj_property>
       </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/mem_unsigned_mem_s">
+         <obj_property name="ElementShortName">mem_unsigned_mem_s</obj_property>
+         <obj_property name="ObjectShortName">mem_unsigned_mem_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/set_a_to_0_id_s">
+         <obj_property name="ElementShortName">set_a_to_0_id_s</obj_property>
+         <obj_property name="ObjectShortName">set_a_to_0_id_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/set_a_to_0_ex_s">
+         <obj_property name="ElementShortName">set_a_to_0_ex_s</obj_property>
+         <obj_property name="ObjectShortName">set_a_to_0_ex_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/a_is_pc_id_s">
+         <obj_property name="ElementShortName">a_is_pc_id_s</obj_property>
+         <obj_property name="ObjectShortName">a_is_pc_id_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/a_is_pc_ex_s">
+         <obj_property name="ElementShortName">a_is_pc_ex_s</obj_property>
+         <obj_property name="ObjectShortName">a_is_pc_ex_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/uncond_jump_id_s">
+         <obj_property name="ElementShortName">uncond_jump_id_s</obj_property>
+         <obj_property name="ObjectShortName">uncond_jump_id_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/is_uncond_id_s">
+         <obj_property name="ElementShortName">is_uncond_id_s</obj_property>
+         <obj_property name="ObjectShortName">is_uncond_id_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/is_uncond_ex_s">
+         <obj_property name="ElementShortName">is_uncond_ex_s</obj_property>
+         <obj_property name="ObjectShortName">is_uncond_ex_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/rs1_in_use_ex_s">
+         <obj_property name="ElementShortName">rs1_in_use_ex_s</obj_property>
+         <obj_property name="ObjectShortName">rs1_in_use_ex_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/rs2_in_use_ex_s">
+         <obj_property name="ElementShortName">rs2_in_use_ex_s</obj_property>
+         <obj_property name="ObjectShortName">rs2_in_use_ex_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/jalr_id_s">
+         <obj_property name="ElementShortName">jalr_id_s</obj_property>
+         <obj_property name="ObjectShortName">jalr_id_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/jal_id_s">
+         <obj_property name="ElementShortName">jal_id_s</obj_property>
+         <obj_property name="ObjectShortName">jal_id_s</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/controlpath_signals_pkg/branch_type_id_s">
+         <obj_property name="ElementShortName">branch_type_id_s[1:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_type_id_s[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/controlpath_signals_pkg/branch_type_if_s">
+         <obj_property name="ElementShortName">branch_type_if_s[1:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_type_if_s[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/controlpath_signals_pkg/pred_address_id_s">
+         <obj_property name="ElementShortName">pred_address_id_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">pred_address_id_s[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/pred_taken_id_s">
+         <obj_property name="ElementShortName">pred_taken_id_s</obj_property>
+         <obj_property name="ObjectShortName">pred_taken_id_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/branch_taken_id_s">
+         <obj_property name="ElementShortName">branch_taken_id_s</obj_property>
+         <obj_property name="ObjectShortName">branch_taken_id_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/bp_address_match_s">
+         <obj_property name="ElementShortName">bp_address_match_s</obj_property>
+         <obj_property name="ObjectShortName">bp_address_match_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/bp_taken_match_s">
+         <obj_property name="ElementShortName">bp_taken_match_s</obj_property>
+         <obj_property name="ObjectShortName">bp_taken_match_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/btb_hit_s">
+         <obj_property name="ElementShortName">btb_hit_s</obj_property>
+         <obj_property name="ObjectShortName">btb_hit_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/btb_hit_id_s">
+         <obj_property name="ElementShortName">btb_hit_id_s</obj_property>
+         <obj_property name="ObjectShortName">btb_hit_id_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/is_ind_s">
+         <obj_property name="ElementShortName">is_ind_s</obj_property>
+         <obj_property name="ObjectShortName">is_ind_s</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/controlpath_signals_pkg/ind_bht_we_s">
+         <obj_property name="ElementShortName">ind_bht_we_s</obj_property>
+         <obj_property name="ObjectShortName">ind_bht_we_s</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group126">
       <obj_property name="label">control_path</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/instruction_i">
          <obj_property name="ElementShortName">instruction_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">instruction_i[31:0]</obj_property>
@@ -830,8 +943,6 @@
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_condition_i">
          <obj_property name="ElementShortName">branch_condition_i</obj_property>
          <obj_property name="ObjectShortName">branch_condition_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/mem_to_reg_o">
          <obj_property name="ElementShortName">mem_to_reg_o</obj_property>
@@ -852,8 +963,6 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pc_next_sel_o">
          <obj_property name="ElementShortName">pc_next_sel_o[1:0]</obj_property>
          <obj_property name="ObjectShortName">pc_next_sel_o[1:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/data_mem_we_o">
          <obj_property name="ElementShortName">data_mem_we_o[3:0]</obj_property>
@@ -878,14 +987,6 @@
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/if_id_flush_o">
          <obj_property name="ElementShortName">if_id_flush_o</obj_property>
          <obj_property name="ObjectShortName">if_id_flush_o</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/controlpath_signals_pkg/if_id_flush_s">
-         <obj_property name="ElementShortName">if_id_flush_s</obj_property>
-         <obj_property name="ObjectShortName">if_id_flush_s</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pc_en_o">
          <obj_property name="ElementShortName">pc_en_o</obj_property>
@@ -898,51 +999,46 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pc_if_i">
          <obj_property name="ElementShortName">pc_if_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">pc_if_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pred_address_o">
          <obj_property name="ElementShortName">pred_address_o[31:0]</obj_property>
          <obj_property name="ObjectShortName">pred_address_o[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pred_taken_o">
-         <obj_property name="ElementShortName">pred_taken_o</obj_property>
-         <obj_property name="ObjectShortName">pred_taken_o</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pc_id_i">
-         <obj_property name="ElementShortName">pc_id_i[31:0]</obj_property>
-         <obj_property name="ObjectShortName">pc_id_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pred_taken_id_i">
-         <obj_property name="ElementShortName">pred_taken_id_i</obj_property>
-         <obj_property name="ObjectShortName">pred_taken_id_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_adder_id_i">
          <obj_property name="ElementShortName">branch_adder_id_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">branch_adder_id_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pred_target_id_i">
-         <obj_property name="ElementShortName">pred_target_id_i[31:0]</obj_property>
-         <obj_property name="ObjectShortName">pred_target_id_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/pc_id_i">
+         <obj_property name="ElementShortName">pc_id_i[31:0]</obj_property>
+         <obj_property name="ObjectShortName">pc_id_i[31:0]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/controlpath_signals_pkg/btb_bht_we_s">
-         <obj_property name="ElementShortName">btb_bht_we_s[1:0]</obj_property>
-         <obj_property name="ObjectShortName">btb_bht_we_s[1:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="Radix">BINARYRADIX</obj_property>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/id_ex_flush_o">
+         <obj_property name="ElementShortName">id_ex_flush_o</obj_property>
+         <obj_property name="ObjectShortName">id_ex_flush_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/rd_be_o">
+         <obj_property name="ElementShortName">rd_be_o[1:0]</obj_property>
+         <obj_property name="ObjectShortName">rd_be_o[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/mem_unsigned_o">
+         <obj_property name="ElementShortName">mem_unsigned_o</obj_property>
+         <obj_property name="ObjectShortName">mem_unsigned_o</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/set_a_to_0_o">
+         <obj_property name="ElementShortName">set_a_to_0_o</obj_property>
+         <obj_property name="ObjectShortName">set_a_to_0_o</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/a_is_pc_o">
+         <obj_property name="ElementShortName">a_is_pc_o</obj_property>
+         <obj_property name="ObjectShortName">a_is_pc_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_op_o">
+         <obj_property name="ElementShortName">branch_op_o[2:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_op_o[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/is_uncond_o">
+         <obj_property name="ElementShortName">is_uncond_o</obj_property>
+         <obj_property name="ObjectShortName">is_uncond_o</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_adder_sel_o">
          <obj_property name="ElementShortName">branch_adder_sel_o</obj_property>
@@ -959,8 +1055,6 @@
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/ctrl_dec/branch_o">
          <obj_property name="ElementShortName">branch_o</obj_property>
          <obj_property name="ObjectShortName">branch_o</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/ctrl_dec/mem_to_reg_o">
          <obj_property name="ElementShortName">mem_to_reg_o</obj_property>
@@ -989,6 +1083,10 @@
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/ctrl_dec/alu_2bit_op_o">
          <obj_property name="ElementShortName">alu_2bit_op_o[1:0]</obj_property>
          <obj_property name="ObjectShortName">alu_2bit_op_o[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/ctrl_dec/funct3_i">
+         <obj_property name="ElementShortName">funct3_i[2:0]</obj_property>
+         <obj_property name="ObjectShortName">funct3_i[2:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group161">
@@ -1062,6 +1160,22 @@
          <obj_property name="ElementShortName">branch_forward_b_o</obj_property>
          <obj_property name="ObjectShortName">branch_forward_b_o</obj_property>
       </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/forwarding_u/rs1_in_use_id_i">
+         <obj_property name="ElementShortName">rs1_in_use_id_i</obj_property>
+         <obj_property name="ObjectShortName">rs1_in_use_id_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/forwarding_u/rs2_in_use_id_i">
+         <obj_property name="ElementShortName">rs2_in_use_id_i</obj_property>
+         <obj_property name="ObjectShortName">rs2_in_use_id_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/forwarding_u/rs1_in_use_ex_i">
+         <obj_property name="ElementShortName">rs1_in_use_ex_i</obj_property>
+         <obj_property name="ObjectShortName">rs1_in_use_ex_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/forwarding_u/rs2_in_use_ex_i">
+         <obj_property name="ElementShortName">rs2_in_use_ex_i</obj_property>
+         <obj_property name="ObjectShortName">rs2_in_use_ex_i</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/forwarding_u/zero_c">
          <obj_property name="ElementShortName">zero_c[4:0]</obj_property>
          <obj_property name="ObjectShortName">zero_c[4:0]</obj_property>
@@ -1086,6 +1200,14 @@
          <obj_property name="ElementShortName">rs2_in_use_i</obj_property>
          <obj_property name="ObjectShortName">rs2_in_use_i</obj_property>
       </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/branch_id_i">
+         <obj_property name="ElementShortName">branch_id_i</obj_property>
+         <obj_property name="ObjectShortName">branch_id_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/jalr_id_i">
+         <obj_property name="ElementShortName">jalr_id_i</obj_property>
+         <obj_property name="ObjectShortName">jalr_id_i</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/rd_address_ex_i">
          <obj_property name="ElementShortName">rd_address_ex_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">rd_address_ex_i[4:0]</obj_property>
@@ -1097,6 +1219,14 @@
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/rd_we_ex_i">
          <obj_property name="ElementShortName">rd_we_ex_i</obj_property>
          <obj_property name="ObjectShortName">rd_we_ex_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/rd_address_mem_i">
+         <obj_property name="ElementShortName">rd_address_mem_i[4:0]</obj_property>
+         <obj_property name="ObjectShortName">rd_address_mem_i[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/mem_to_reg_mem_i">
+         <obj_property name="ElementShortName">mem_to_reg_mem_i</obj_property>
+         <obj_property name="ObjectShortName">mem_to_reg_mem_i</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/hazard_u/pc_en_o">
          <obj_property name="ElementShortName">pc_en_o</obj_property>
@@ -1122,272 +1252,305 @@
    <wvobject type="group" fp_name="group196">
       <obj_property name="label">branch_predict_u</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/pc_if_i">
          <obj_property name="ElementShortName">pc_if_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">pc_if_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/pred_taken_o">
          <obj_property name="ElementShortName">pred_taken_o</obj_property>
          <obj_property name="ObjectShortName">pred_taken_o</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/pred_address_o">
          <obj_property name="ElementShortName">pred_address_o[31:0]</obj_property>
          <obj_property name="ObjectShortName">pred_address_o[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/pc_id_i">
          <obj_property name="ElementShortName">pc_id_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">pc_id_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/target_addr_id_i">
          <obj_property name="ElementShortName">target_addr_id_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">target_addr_id_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb_bht_we_i">
          <obj_property name="ElementShortName">btb_bht_we_i[1:0]</obj_property>
          <obj_property name="ObjectShortName">btb_bht_we_i[1:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/branch_taken_id_i">
          <obj_property name="ElementShortName">branch_taken_id_i</obj_property>
          <obj_property name="ObjectShortName">branch_taken_id_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/en_i">
          <obj_property name="ElementShortName">en_i</obj_property>
          <obj_property name="ObjectShortName">en_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/branch_type_i">
+         <obj_property name="ElementShortName">branch_type_i[1:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_type_i[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/branch_type_o">
+         <obj_property name="ElementShortName">branch_type_o[1:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_type_o[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb_hit_o">
+         <obj_property name="ElementShortName">btb_hit_o</obj_property>
+         <obj_property name="ObjectShortName">btb_hit_o</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht_we_i">
+         <obj_property name="ElementShortName">ind_bht_we_i</obj_property>
+         <obj_property name="ObjectShortName">ind_bht_we_i</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/rd_index">
          <obj_property name="ElementShortName">rd_index[4:0]</obj_property>
          <obj_property name="ObjectShortName">rd_index[4:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/rd_tag">
          <obj_property name="ElementShortName">rd_tag[24:0]</obj_property>
          <obj_property name="ObjectShortName">rd_tag[24:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/target_addr">
          <obj_property name="ElementShortName">target_addr[31:0]</obj_property>
          <obj_property name="ObjectShortName">target_addr[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/target_tag">
          <obj_property name="ElementShortName">target_tag[24:0]</obj_property>
          <obj_property name="ObjectShortName">target_tag[24:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/wr_index">
          <obj_property name="ElementShortName">wr_index[4:0]</obj_property>
          <obj_property name="ObjectShortName">wr_index[4:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/wr_tag">
          <obj_property name="ElementShortName">wr_tag[24:0]</obj_property>
          <obj_property name="ObjectShortName">wr_tag[24:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb_we">
          <obj_property name="ElementShortName">btb_we</obj_property>
          <obj_property name="ObjectShortName">btb_we</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/target_valid">
          <obj_property name="ElementShortName">target_valid</obj_property>
          <obj_property name="ObjectShortName">target_valid</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb_hit">
          <obj_property name="ElementShortName">btb_hit</obj_property>
          <obj_property name="ObjectShortName">btb_hit</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht_taken">
          <obj_property name="ElementShortName">bht_taken</obj_property>
          <obj_property name="ObjectShortName">bht_taken</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht_we">
          <obj_property name="ElementShortName">bht_we</obj_property>
          <obj_property name="ObjectShortName">bht_we</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht_taken">
+         <obj_property name="ElementShortName">ind_bht_taken</obj_property>
+         <obj_property name="ObjectShortName">ind_bht_taken</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/is_ind_s">
+         <obj_property name="ElementShortName">is_ind_s</obj_property>
+         <obj_property name="ObjectShortName">is_ind_s</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/branch_type_s">
+         <obj_property name="ElementShortName">branch_type_s[1:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_type_s[1:0]</obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/BTB_ADDR_WIDTH">
          <obj_property name="ElementShortName">BTB_ADDR_WIDTH</obj_property>
          <obj_property name="ObjectShortName">BTB_ADDR_WIDTH</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/CNT_WIDTH">
          <obj_property name="ElementShortName">CNT_WIDTH</obj_property>
          <obj_property name="ObjectShortName">CNT_WIDTH</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group219">
       <obj_property name="label">btb</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/rd_address_i">
          <obj_property name="ElementShortName">rd_address_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">rd_address_i[4:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/target_o">
          <obj_property name="ElementShortName">target_o[31:0]</obj_property>
          <obj_property name="ObjectShortName">target_o[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/tag_o">
          <obj_property name="ElementShortName">tag_o[24:0]</obj_property>
          <obj_property name="ObjectShortName">tag_o[24:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/wr_address_i">
          <obj_property name="ElementShortName">wr_address_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">wr_address_i[4:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/target_i">
          <obj_property name="ElementShortName">target_i[31:0]</obj_property>
          <obj_property name="ObjectShortName">target_i[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/tag_i">
          <obj_property name="ElementShortName">tag_i[24:0]</obj_property>
          <obj_property name="ObjectShortName">tag_i[24:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/we_i">
          <obj_property name="ElementShortName">we_i</obj_property>
          <obj_property name="ObjectShortName">we_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/valid_o">
          <obj_property name="ElementShortName">valid_o</obj_property>
          <obj_property name="ObjectShortName">valid_o</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/en_i">
          <obj_property name="ElementShortName">en_i</obj_property>
          <obj_property name="ObjectShortName">en_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/branch_type_i">
+         <obj_property name="ElementShortName">branch_type_i[1:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_type_i[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/branch_type_o">
+         <obj_property name="ElementShortName">branch_type_o[1:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_type_o[1:0]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/target_s">
          <obj_property name="ElementShortName">target_s[0:31][31:0]</obj_property>
          <obj_property name="ObjectShortName">target_s[0:31][31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/tag_s">
          <obj_property name="ElementShortName">tag_s[0:31][24:0]</obj_property>
          <obj_property name="ObjectShortName">tag_s[0:31][24:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/valid_s">
-         <obj_property name="ElementShortName">valid_s[31:0]</obj_property>
-         <obj_property name="ObjectShortName">valid_s[31:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="ElementShortName">valid_s[0:31]</obj_property>
+         <obj_property name="ObjectShortName">valid_s[0:31]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/branch_type_s">
+         <obj_property name="ElementShortName">branch_type_s[0:31][1:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_type_s[0:31][1:0]</obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/WIDTH">
          <obj_property name="ElementShortName">WIDTH</obj_property>
          <obj_property name="ObjectShortName">WIDTH</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/cond">
+         <obj_property name="ElementShortName">cond</obj_property>
+         <obj_property name="ObjectShortName">cond</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/btb/uncond">
+         <obj_property name="ElementShortName">uncond</obj_property>
+         <obj_property name="ObjectShortName">uncond</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group234">
       <obj_property name="label">bht</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/rd_addr_i">
          <obj_property name="ElementShortName">rd_addr_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">rd_addr_i[4:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/taken_o">
          <obj_property name="ElementShortName">taken_o</obj_property>
          <obj_property name="ObjectShortName">taken_o</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/wr_addr_i">
          <obj_property name="ElementShortName">wr_addr_i[4:0]</obj_property>
          <obj_property name="ObjectShortName">wr_addr_i[4:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/taken_i">
          <obj_property name="ElementShortName">taken_i</obj_property>
          <obj_property name="ObjectShortName">taken_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/we_i">
          <obj_property name="ElementShortName">we_i</obj_property>
          <obj_property name="ObjectShortName">we_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/en_i">
          <obj_property name="ElementShortName">en_i</obj_property>
          <obj_property name="ObjectShortName">en_i</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/taken_s">
          <obj_property name="ElementShortName">taken_s[0:31][1:0]</obj_property>
          <obj_property name="ObjectShortName">taken_s[0:31][1:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/CNT_WIDTH">
          <obj_property name="ElementShortName">CNT_WIDTH</obj_property>
          <obj_property name="ObjectShortName">CNT_WIDTH</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/bht/AWIDTH">
          <obj_property name="ElementShortName">AWIDTH</obj_property>
          <obj_property name="ObjectShortName">AWIDTH</obj_property>
-         <obj_property name="CustomSignalColor">#FF0000</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group12623">
+      <obj_property name="label">ind_bht</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/rd_addr_i">
+         <obj_property name="ElementShortName">rd_addr_i[4:0]</obj_property>
+         <obj_property name="ObjectShortName">rd_addr_i[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/taken_o">
+         <obj_property name="ElementShortName">taken_o</obj_property>
+         <obj_property name="ObjectShortName">taken_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/wr_addr_i">
+         <obj_property name="ElementShortName">wr_addr_i[4:0]</obj_property>
+         <obj_property name="ObjectShortName">wr_addr_i[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/taken_i">
+         <obj_property name="ElementShortName">taken_i</obj_property>
+         <obj_property name="ObjectShortName">taken_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/we_i">
+         <obj_property name="ElementShortName">we_i</obj_property>
+         <obj_property name="ObjectShortName">we_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/en_i">
+         <obj_property name="ElementShortName">en_i</obj_property>
+         <obj_property name="ObjectShortName">en_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/taken_s">
+         <obj_property name="ElementShortName">taken_s[0:31][0:0]</obj_property>
+         <obj_property name="ObjectShortName">taken_s[0:31][0:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/CNT_WIDTH">
+         <obj_property name="ElementShortName">CNT_WIDTH</obj_property>
+         <obj_property name="ObjectShortName">CNT_WIDTH</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/TOP_RISCV_tb/TOP_RISCV_1/control_path_1/branch_predict_u/ind_bht/AWIDTH">
+         <obj_property name="ElementShortName">AWIDTH</obj_property>
+         <obj_property name="ObjectShortName">AWIDTH</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group328">
@@ -1412,6 +1575,30 @@
       <wvobject type="array" fp_name="/alu_ops_pkg/eq_op">
          <obj_property name="ElementShortName">eq_op[4:0]</obj_property>
          <obj_property name="ObjectShortName">eq_op[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/alu_ops_pkg/xor_op">
+         <obj_property name="ElementShortName">xor_op[4:0]</obj_property>
+         <obj_property name="ObjectShortName">xor_op[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/alu_ops_pkg/lts_op">
+         <obj_property name="ElementShortName">lts_op[4:0]</obj_property>
+         <obj_property name="ObjectShortName">lts_op[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/alu_ops_pkg/ltu_op">
+         <obj_property name="ElementShortName">ltu_op[4:0]</obj_property>
+         <obj_property name="ObjectShortName">ltu_op[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/alu_ops_pkg/sll_op">
+         <obj_property name="ElementShortName">sll_op[4:0]</obj_property>
+         <obj_property name="ObjectShortName">sll_op[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/alu_ops_pkg/srl_op">
+         <obj_property name="ElementShortName">srl_op[4:0]</obj_property>
+         <obj_property name="ObjectShortName">srl_op[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/alu_ops_pkg/sra_op">
+         <obj_property name="ElementShortName">sra_op[4:0]</obj_property>
+         <obj_property name="ObjectShortName">sra_op[4:0]</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

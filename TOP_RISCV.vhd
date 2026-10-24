@@ -43,10 +43,7 @@ architecture structural of TOP_RISCV is
    -- za branch predictor
    signal branch_adder_id_s : std_logic_vector (31 downto 0);
    signal pred_address_s : std_logic_vector (31 downto 0);
-   signal pred_taken_s : std_logic;
    
-   signal pred_taken_id_s : std_logic;
-   signal pred_target_id_s : std_logic_vector (31 downto 0);
    
    signal pc_id_s : std_logic_vector (31 downto 0);
    
@@ -103,9 +100,6 @@ begin
          -- dodatni portovi za branch predict logiku
          branch_adder_id_o => branch_adder_id_s,
          pred_address_i => pred_address_s, 
-         pred_taken_i => pred_taken_s,
-         pred_taken_id_o => pred_taken_id_s,
-         pred_target_id_o => pred_target_id_s,
          pc_id_o => pc_id_s,
          
          id_ex_flush_i => id_ex_flush_s,
@@ -157,10 +151,7 @@ begin
          pc_if_i => instr_mem_address_s,
          pred_address_o => pred_address_s, 
          branch_adder_id_i => branch_adder_id_s,
-         pred_taken_o => pred_taken_s,
          
-         pred_taken_id_i => pred_taken_id_s,
-         pred_target_id_i => pred_target_id_s,
          
          pc_id_i => pc_id_s,
          

@@ -49,9 +49,9 @@ begin
             mem_to_reg_ex_i = '1' and rd_we_ex_i = '1')then -- load instrukcija je u EX fazi
             en_s <='0';
          end if;
-      elsif(branch_id_i = '1' or jalr_id_i = '1')then -- instrukcija u ID fazi je skok (branch)
+      elsif(branch_id_i = '1' or jalr_id_i = '1')then -- instrukcija u ID fazi je skok 
          if (((rs1_address_id_i = rd_address_ex_i and rs1_in_use_i = '1') or
-          (rs2_address_id_i = rd_address_ex_i and rs2_in_use_i = '1'))
+          (rs2_address_id_i = rd_address_ex_i and rs2_in_use_i = '1')) -- uvek 0 za jalr
             and rd_we_ex_i = '1') then -- load ili R-tip u EX fazi
             en_s <='0';
          elsif(

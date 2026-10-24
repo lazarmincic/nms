@@ -35,11 +35,6 @@ entity control_path is
       pred_address_o : out std_logic_vector (31 downto 0);
       -- izracunata adresa skoka u id fazi
       branch_adder_id_i : in std_logic_vector (31 downto 0);
-      -- predviđen rezultat skoka (if)
-      pred_taken_o : out std_logic;
-      -- iz datapath-a - predviđena adresa i rezultat u id fazi (registrovan)
-      pred_taken_id_i : in std_logic;
-      pred_target_id_i : in std_logic_vector (31 downto 0);
       -- vrednost pc registra u id fazi (za upis u btb i bht)
       pc_id_i : in std_logic_vector (31 downto 0);
       -- flush za id ex registar unutar data path a
@@ -96,25 +91,46 @@ begin
    
    jalr_id_s <= '1' when instruction_i(6 downto 2) = "11001" else
                 '0';
+                
+   jal_id_s <= '1' when instruction_i(6 downto 2) = "11011" else
+               '0';
    
-   uncond_jump_id_s <= '1' when instruction_i(6 downto 2) = "11011" or jalr_id_s = '1' else
+   uncond_jump_id_s <= '1' when jal_id_s = '1' or jalr_id_s = '1' else
                        '0';
-                     
-   pc_next_if_s : process(branch_id_s, branch_condition_i, bcc_id_s, pred_taken_s, pred_taken_id_i,
-        branch_adder_id_i, pred_target_id_i, uncond_jump_id_s)
+        
+        
+   -- bp komb signali (id faza)
+   bp_address_match_s <= '1' when branch_adder_id_i = pred_address_id_s else '0';
+   bp_taken_match_s <= '1' when branch_condition_i = pred_taken_id_s else '0';
+   
+   id_ex_flush_s <= '0'; -- ipak ne treba, višak
+   
+   pc_next_if_s : process(branch_id_s, bcc_id_s, pred_taken_s, bp_address_match_s, bp_taken_match_s
+        ,uncond_jump_id_s, branch_type_if_s, branch_condition_i, jalr_id_s , jal_id_s, btb_hit_id_s
+        ,pred_taken_id_s
+        )
+        
    begin
-      if_id_flush_s <= '0';
+      if_id_flush_s <= '0'; 
       pc_next_sel_o <= "00"; -- nema skoka
       
       btb_bht_we_s <= "00";
-      id_ex_flush_s <= '0';
+      branch_taken_id_s <= branch_condition_i; -- ulaz u bht od bpu
+      ind_bht_we_s <= '0';
       -- if faza
-      if (pred_taken_s = '1') then
-         pc_next_sel_o <= "01"; 
+      -- uslovna petlja ili jalr
+      if branch_type_if_s /= "01" then
+        if pred_taken_s = '1' then
+            pc_next_sel_o <= "01"; 
+        end if;
+      else 
+      -- jal petlja
+        pc_next_sel_o <= "01"; 
       end if;
+      
       -- id faza
-      if (branch_id_s = '1') then -- instrukcija skoka
-         if (branch_condition_i = pred_taken_id_i and branch_adder_id_i = pred_target_id_i) then
+      if (branch_id_s = '1') then -- instrukcija uslovnog skoka
+         if (bp_taken_match_s = '1' and bp_address_match_s = '1') then 
             -- skok je tačno predviđen - adresa i ishod grane su tacno predvidjeni
             -- azuriraj bht unutar bpu, btb se ne azurira
             btb_bht_we_s(0) <= '1';
@@ -123,36 +139,80 @@ begin
             -- prosledi izracunatu adresu ako se skok desio
             -- prediktor je vec prosledio pogresnu instrukciju u id, pa immediate vrednost 
             -- izracunata nije ta na koju treba da se skoci.
+            if_id_flush_s <= '1';
+            
             if (branch_condition_i = '1') then
                 -- prevideo da ne skace a skocio
                 pc_next_sel_o <= "10";
-                if_id_flush_s <= '1';
             else
                 -- predvideo da skace a ne skace
-                if_id_flush_s <= '1';
-                id_ex_flush_s <= '1';
                 pc_next_sel_o <= "11";
             end if;
-            -- azuriraj btb ukoliko se adrese ne poklapaju
-            if (branch_adder_id_i /= pred_target_id_i) then
+            -- azuriraj btb ukoliko se adrese ne poklapaju (ili podatak nije validan)
+            if (bp_address_match_s = '0') then
                 btb_bht_we_s(1) <= '1';
             end if;
             -- azuriraj bht ukoliko se ishodi skoka ne poklapaju
-            if (branch_condition_i /= pred_taken_id_i) then
+            if (bp_taken_match_s = '0') then
                 btb_bht_we_s(0) <= '1';
             end if;
          end if;
-      end if;
-      -- bezuslovni skok
-      if uncond_jump_id_s = '1' then
-         pc_next_sel_o <= "10";
-         if_id_flush_s <= '1';
+      elsif uncond_jump_id_s = '1' then  -- bezuslovni skok
+         
+         if jalr_id_s = '1' then -- indirektna
+             branch_taken_id_s <= bp_address_match_s and btb_hit_id_s; -- ulaz u bht od bpu
+             -- skok se ne predvidja, vec adresa, za sta se koristi postojuci hardver
+             -- adresa tačno predviđena
+             btb_bht_we_s(1) <= '1'; -- zbog metapodataka bitova
+             if bp_address_match_s = '1' and pred_taken_id_s = '1' then
+                -- taken u ovom kontekstu pretstavlja histerezis
+                -- ništa u btb, adresa je dobra i ne menja se
+                -- upis u ind bht
+                ind_bht_we_s <= '1';
+             else
+                -- adresa netačno predviđena
+                -- upisuj i u btb i bht
+                if (pred_taken_id_s = '0') then
+                    ind_bht_we_s <= '1';
+                end if;
+                -- flushuj if id 
+                if_id_flush_s <= '1';
+                pc_next_sel_o <= "10";
+             end if;
+         elsif jal_id_s = '1' then
+            -- za jal histerezis nije od koristi jer je direktni tip skoka
+            -- u sladu sa tim bht se ne koristi
+            if bp_address_match_s = '1' and btb_hit_id_s = '1' then
+            else
+                btb_bht_we_s(1) <= '1';
+                if_id_flush_s <= '1';
+                pc_next_sel_o <= "10";
+            end if;
+        end if;
       end if;
    end process;
 
    bpu_en_s <= if_id_en_s;
 
    --*********** Sekvencijalna logika ******************
+   --IF/ID registar
+   if_id : process (clk) is
+   begin
+      if (rising_edge(clk)) then
+        if(if_id_en_s = '1')then
+            if (reset = '0' or if_id_flush_s = '1')then
+               pred_taken_id_s <= '0';
+               pred_address_id_s <= (others => '0');
+               btb_hit_id_s <= '0';
+            else
+               pred_taken_id_s <= pred_taken_s;
+               pred_address_id_s <= pred_address_s;
+               btb_hit_id_s <= btb_hit_s;
+            end if; 
+        end if;
+      end if;
+   end process;
+   
    --ID/EX registar
    id_ex : process (clk) is
    begin
@@ -328,11 +388,20 @@ begin
             pc_id_i => pc_id_i,
             target_addr_id_i => branch_adder_id_i,
             btb_bht_we_i => btb_bht_we_s,
-            branch_taken_id_i => branch_condition_i,
-            en_i => bpu_en_s
+            branch_taken_id_i => branch_taken_id_s,
+            en_i => bpu_en_s,
+            branch_type_i => branch_type_id_s,-- id
+            branch_type_o => branch_type_if_s, -- if
+            btb_hit_o => btb_hit_s,
+            ind_bht_we_i => ind_bht_we_s -- id
         );
         
-    pred_taken_o <= pred_taken_s;
+    branch_type_id_s <= "00" when branch_id_s = '1' else
+                        "01" when jal_id_s = '1' else
+                        "10" when jalr_id_s = '1' else
+                        "00";
+        
+    
     pred_address_o <= pred_address_s;
     
     -- kontrolni signal za biranje bitova za prosledjivanje u wb fazu
